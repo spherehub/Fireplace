@@ -269,7 +269,8 @@ namespace fireplace {
      * OpenGL function pointers by a loading library like GLEW or GLAD.
      */
     struct _win32_wgl_context final {
-        /* A handle to the device context of the window that this context
+        /*
+         * A handle to the device context of the window that this context
          * renders to.
          */
         HDC hdc;
