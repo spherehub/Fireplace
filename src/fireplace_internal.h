@@ -4,6 +4,8 @@
 // For ostream and other printing operations.
 #include <fireplace.h>
 #include <iostream>
+#include <unordered_map>
+#include <queue>
 
 // Include our own platform headers.
 #ifdef _WIN32
@@ -81,6 +83,9 @@ namespace fireplace {
 
         // The registered info from processes in the library that provide info.
         std::queue<_info> lib_infolog;
+
+        // A map of user pointers to names.
+        std::unordered_map<std::string, handle> user_pointers;
 
         // Constructs a new instance of the library.
         explicit _fireplace_library();

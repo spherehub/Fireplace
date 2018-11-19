@@ -44,7 +44,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 10
+#define FIREPLACE_PATCH 11
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
@@ -208,6 +208,12 @@ namespace fireplace {
 
     // Prints all of the info log to the console.
     void dump_info_log();
+
+    // Gets a user pointer by it's mapped name.
+    handle get_user_pointer(std::string pointer_name);
+
+    // Sets a user pointer.
+    void set_user_pointer(std::string pointer_name, handle _handle);
 }
 
 #endif
