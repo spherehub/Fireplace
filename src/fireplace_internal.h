@@ -95,7 +95,7 @@ namespace fireplace {
         ~_fireplace_library();
 
         // Assignment not allowed.
-        _fireplace_library& operator=(_fireplace_library other) = delete;
+        _fireplace_library& operator=(_fireplace_library& other) = delete;
     };
 
     /*
