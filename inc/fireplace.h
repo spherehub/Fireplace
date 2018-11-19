@@ -41,7 +41,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 4
+#define FIREPLACE_PATCH 5
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
@@ -91,7 +91,45 @@
 #endif
 
 namespace fireplace {
+    // Aligning with Windows based handle types.
+    typedef void* handle;
 
+    /*
+     * A structure representing a single manipulatable window on a given desktop
+     * environment.
+     */
+    class frame final {
+        // Handle to the underlying window.
+        handle m_handle;
+
+        // Tells whether or not this window is open.
+        bool m_open;
+
+        // Handle to the underlying context of this window.
+        handle m_context;
+
+    public:
+        // Constructs a default window.
+        explicit frame();
+
+        // Constructs a new window with the given unicode title.
+        explicit frame(const std::wstring& title);
+
+        /*
+         * Constructs a new window with a rvalue reference unicode title. This
+         * is strictly an optimization.
+         */
+        explicit frame(std::wstring&& title);
+
+        // Copy constructor.
+        frame(const frame& other);
+
+        // Move constructor.
+        frame(frame&& other);
+
+        // Deconstructs this window.
+        ~frame();
+    }
 }
 
 #endif
