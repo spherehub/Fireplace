@@ -41,7 +41,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 6
+#define FIREPLACE_PATCH 7
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
@@ -108,6 +108,9 @@ namespace fireplace {
         // Handle to the underlying context of this window.
         handle m_context;
 
+        // Swaps the contents of two frames.
+        void swap(frame& other);
+
     public:
         // Constructs a default window.
         explicit frame();
@@ -127,8 +130,74 @@ namespace fireplace {
         // Copy-swap idiom operator.
         frame& operator=(frame other);
 
-        // Swaps the contents of two frames.
-        void swap(frame& other);
+        // Closes this window. This releases some memory so it is non-const.
+        void close();
+
+        // Disables this window.
+        void disable() const;
+
+        // Enables this window.
+        void enable() const;
+
+        // Focuses this window.
+        void focus() const;
+
+        // Gets the position of this window.
+        void get_position(int& pos_x, int& pos_y) const;
+
+        // Gets the size of this window.
+        void get_size(int& width, int& height) const;
+
+        // Returns the handle to this window.
+        const void* handle() const;
+
+        // Hides this window.
+        void hide() const;
+
+        // Checks if this window is enabled.
+        bool is_enabled() const;
+
+        // Checks if this window is focused.
+        bool is_focused() const;
+
+        // Checks if this window is maximized.
+        bool is_maximized() const;
+
+        // Checks if this window is minimized.
+        bool is_minimized() const;
+
+        // Returns whether or not this window is open.
+        bool is_open() const;
+
+        // Makes this window the current window to be rendered to.
+        void make_current() const;
+
+        // Maximizes this window.
+        void maximize() const;
+
+        // Minimizes this window.
+        void minimize() const;
+
+        // Polls the events of this window.
+        void poll_events() const;
+
+        // Repositions this window.
+        void position_at(int pos_x, int pos_y);
+
+        // Resizes this window.
+        void resize_to(int width, int height);
+
+        // Sets the title of this window.
+        void set_title(std::wstring title);
+
+        // Shows this window.
+        void show() const;
+
+        // Swaps this window's frame buffers.
+        void swap_buffers() const;
+
+        // Gets the title of this window.
+        std::wstring title() const;
     }
 }
 
