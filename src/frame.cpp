@@ -182,7 +182,7 @@ void fireplace::frame::resize_to(int width, int height) {
 }
 
 // Sets the title of this window.
-void fireplace::frame::set_title(std::wstring title) const {
+void fireplace::frame::set_title(std::wstring title) {
 #ifdef _WIN32
     _win32_set_title(m_handle, title.c_str());
 #endif
