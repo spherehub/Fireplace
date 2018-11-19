@@ -44,7 +44,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 9
+#define FIREPLACE_PATCH 10
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
@@ -201,7 +201,13 @@ namespace fireplace {
 
         // Gets the title of this window.
         std::wstring title() const;
-    }
+    };
+
+    // Prints all errors to the console.
+    void dump_errors();
+
+    // Prints all of the info log to the console.
+    void dump_info_log();
 }
 
 #endif
