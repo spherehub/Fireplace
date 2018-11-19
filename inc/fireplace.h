@@ -23,8 +23,28 @@
 #ifndef _FIREPLACE_HEADER
 #define _FIREPLACE_HEADER
 
+#if !defined(_WIN32) && (defined(__WIN32__) || defined(WIN32) || defined(__MINGW32__))
+#define _WIN32
+
+// These defines are important to specific windows things.
+#ifndef APIENTRY
+#define APIENTRY __stdcall
+#endif // APIENTRY
+#ifndef CALLBACK
+#define CALLBACK __stdcall
+#endif // CALLBACK
+#ifndef WINGDIAPI
+#define WINGDIAPI __declspec(dllimport)
+#endif // WINGDIAPI
+#endif // _WIN32
+
+// Versioning.
+#define FIREPLACE_MAJOR 0
+#define FIREPLACE_MINOR 0
+#define FIREPLACE_PATCH 3
+
 namespace fireplace {
-    
+
 }
 
 #endif
