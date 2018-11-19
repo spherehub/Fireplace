@@ -44,10 +44,39 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 14
+#define FIREPLACE_PATCH 15
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
+// OpenGL and OpenGL ES headers.
+#ifdef _FIREPLACE_INCLUDE_ES1
+#include <GLES/gl.h>
+#ifdef _FIREPLACE_INCLUDE_GLEXT
+#include <GLES/glext.h>
+#endif // _FIREPLACE_INCLUDE_GLEXT
+#elif defined(_FIREPLACE_INCLUDE_ES2)
+#include <GLES2/gl2.h>
+#ifdef _FIREPLACE_INCLUDE_GLEXT
+#include <GLES2/gl2ext.h>
+#endif // _FIREPLACE_INCLUDE_GLEXT
+#elif defined(_FIREPLACE_INCLUDE_ES3)
+#include <GLES3/gl3.h>
+#ifdef _FIREPLACE_INCLUDE_GLEXT
+#include <GLES2/gl2ext.h>
+#endif // _FIREPLACE_INCLUDE_GLEXT
+#elif _FIREPLACE_INCLUDE_ES31
+#include <GLES3/gl31.h>
+#ifdef _FIREPLACE_INCLUDE_GLEXT
+#include <GLES2/gl2ext.h>
+#endif // _FIREPLACE_INCLUDE_GLEXT
+#elif _FIREPLACE_INCLUDE_ES32
+#include <GLES3/gl32.h>
+#ifdef _FIREPLACE_INCLUDE_GLEXT
+#include <GLES2/gl2ext.h>
+#endif // _FIREPLACE_INCLUDE_GLEXT
+#elif _FIREPLACE_INCLUDE_GLCOREARB
+#include <GL/glcorearb.h>
+#endif // _FIREPLACE_INCLUDE_ES
 #define opengl                      0x1000
 
 // OpenGL Attribute constants.
@@ -89,8 +118,8 @@
 #define release_behaviour_flush     0x110A
 #define release_behaviour_none      0x110B
 #define native_context_api          0x110C
-#define egl_context_api             0x110D
-#define osmesa_context_api          0x110E
+#define egl_context_api             0x110D // Future support for egl.
+#define osmesa_context_api          0x110E // Future support for osmesa.
 #endif
 
 namespace fireplace {

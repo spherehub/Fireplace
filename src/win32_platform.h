@@ -57,6 +57,7 @@
 #include <dwmapi.h>
 #include <VersionHelpers.h>
 #include <xinput.h>
+#include "wgl_context.h"
 
 #ifndef FIREPLACE_WIN32CLASSNAME
 #define FIREPLACE_WIN32CLASSNAME L"FIREPLACE_CLASS"
