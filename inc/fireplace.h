@@ -38,10 +38,13 @@
 #endif // WINGDIAPI
 #endif // _WIN32
 
+// Including string because our headers needs it.
+#include <string>
+
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 7
+#define FIREPLACE_PATCH 8
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
