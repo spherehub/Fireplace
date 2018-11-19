@@ -57,7 +57,6 @@
 #include <dwmapi.h>
 #include <VersionHelpers.h>
 #include <xinput.h>
-#include "wgl_context.h"
 
 #ifndef FIREPLACE_WIN32CLASSNAME
 #define FIREPLACE_WIN32CLASSNAME L"FIREPLACE_CLASS"
@@ -212,7 +211,7 @@ namespace fireplace {
      * Specifically, a WGL context that can be used to later to load modern
      * OpenGL function pointers by a loading library like GLEW or GLAD.
      */
-    struct _win32_context final {
+    struct _win32_wgl_context final {
         /* A handle to the device context of the window that this context
          * renders to.
          */
@@ -232,17 +231,17 @@ namespace fireplace {
          */
         PFD pfd;
 
-        // Constructs a new _win32_context.
-        explicit _win32_context();
+        // Constructs a new _win32_wgl_context.
+        explicit _win32_wgl_context();
 
         // Disallow copy construction, this is temporary.
-        _win32_context(const _win32_context& other) = delete;
+        _win32_wgl_context(const _win32_wgl_context& other) = delete;
 
         // Disallow move construction, this is temporary.
-        _win32_context(_win32_context&& other) = delete;
+        _win32_wgl_context(_win32_wgl_context&& other) = delete;
 
         // Deconstructs this context.
-        ~_win32_context();
+        ~_win32_wgl_context();
 
         // Makes this context current.
         void make_current();
