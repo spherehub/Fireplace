@@ -41,7 +41,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 5
+#define FIREPLACE_PATCH 6
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
@@ -113,13 +113,7 @@ namespace fireplace {
         explicit frame();
 
         // Constructs a new window with the given unicode title.
-        explicit frame(const std::wstring& title);
-
-        /*
-         * Constructs a new window with a rvalue reference unicode title. This
-         * is strictly an optimization.
-         */
-        explicit frame(std::wstring&& title);
+        explicit frame(std::wstring title);
 
         // Copy constructor.
         frame(const frame& other);
@@ -129,6 +123,12 @@ namespace fireplace {
 
         // Deconstructs this window.
         ~frame();
+
+        // Copy-swap idiom operator.
+        frame& operator=(frame other);
+
+        // Swaps the contents of two frames.
+        void swap(frame& other);
     }
 }
 
