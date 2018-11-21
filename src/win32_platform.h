@@ -131,7 +131,7 @@ namespace fireplace {
     bool _win32_is_minimized(handle _window);
 
     // Checks if the given window is open still.
-    bool _win32_is_window_open(handle _window);
+    bool _win32_is_open(handle _window);
 
     // Maximizes the given window.
     void _win32_maximize(handle _window);
@@ -150,6 +150,9 @@ namespace fireplace {
 
     // Sets the title of the given window.
     void _win32_set_title(handle _window, const wchar_t* title);
+
+    // Gets the title of the given window.
+    std::wstring _win32_title(handle _window);
 
     // WGL specific structures and code.
 #ifdef _FIREPLACE_OPENGL
