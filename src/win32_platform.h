@@ -279,21 +279,21 @@ namespace fireplace {
         HMODULE gl_instance;
 
         // Tells if wgl has been initialized.
-        bool wgl_initialized;
+        bool initialized;
 
         // Necessary function pointers.
-        PFNWGLCREATECONTEXT             wgl_create_context;
-        PFNWGLDELETECONTEXT             wgl_delete_context;
-        PFNWGLGETPROCADDRESS            wgl_get_proc_address;
-        PFNWGLGETCURRENTDC              wgl_get_current_dc;
-        PFNWGLGETCURRENTCONTEXT         wgl_get_current_context;
-        PFNWGLMAKECURRENT               wgl_make_current;
-        PFNWGLSHARELISTS                wgl_share_lists;
-        PFNWGLSWAPINTERVALEXT           wgl_swap_interval_ext;
-        PFNWGLCREATECONTEXTATTRIBSARB   wgl_create_context_attribs_arb;
-        PFNWGLGETEXTENSIONSSTRINGARB    wgl_get_extensions_string_arb;
-        PFNWGLGETEXTENSIONSSTRINGEXT    wgl_get_extensions_string_ext;
-        PFNWGLGETPIXELFORMATATTRIBIVARB wgl_get_pixel_format_attribiv_arb;
+        PFNWGLCREATECONTEXT             create_context;
+        PFNWGLDELETECONTEXT             delete_context;
+        PFNWGLGETPROCADDRESS            get_proc_address;
+        PFNWGLGETCURRENTDC              get_current_dc;
+        PFNWGLGETCURRENTCONTEXT         get_current_context;
+        PFNWGLMAKECURRENT               make_current;
+        PFNWGLSHARELISTS                share_lists;
+        PFNWGLSWAPINTERVALEXT           swap_interval_ext;
+        PFNWGLCREATECONTEXTATTRIBSARB   create_context_attribs_arb;
+        PFNWGLGETEXTENSIONSSTRINGARB    get_extensions_string_arb;
+        PFNWGLGETEXTENSIONSSTRINGEXT    get_extensions_string_ext;
+        PFNWGLGETPIXELFORMATATTRIBIVARB get_pixel_format_attribiv_arb;
 
         /*
          * Things needed in order to set up a context the way the user wants it
@@ -328,32 +328,32 @@ namespace fireplace {
      * context. Values are set by default to their defaults.
      */
     struct _win32_wgl_config final {
-        unsigned int profile_attrib                    =  any_profile;
-        unsigned int debug_attrib                      =  0;
-        unsigned int forward_compatible_attrib         =  0;
-        unsigned int no_error_attrib                   =  0;
-        unsigned int release_behaviour_attrib          =  any_release_behaviour;
-        unsigned int robustness_attrib                 =  no_robustness;
-        unsigned int major_version_attrib              =  1;
-        unsigned int minor_version_attrib              =  1;
-        unsigned int creation_api_attrib               =  native_context_api;
-        unsigned int client_api_attrib                 =  opengl_api;
-        unsigned int stereoscopic_attrib               =  0;
-        unsigned int multisample_attrib                =  0;
-        unsigned int auxiliary_buffers_attrib          =  0;
-        unsigned int accumulation_alpha_bits_attrib    = -1;
-        unsigned int accumulation_green_bits_attrib    = -1;
-        unsigned int accumulation_blue_bits_attrib     = -1;
-        unsigned int accumulation_red_bits_attrib      = -1;
-        unsigned int stencil_bits_attrib               =  8;
-        unsigned int depth_bits_attrib                 = 24;
-        unsigned int alpha_bits_attrib                 =  8;
-        unsigned int blue_bits_attrib                  =  8;
-        unsigned int green_bits_attrib                 =  8;
-        unsigned int red_bits_attrib                   =  8;
+        unsigned int profile                    =  any_profile;
+        unsigned int debug                      =  0;
+        unsigned int forward_compatibility      =  0;
+        unsigned int no_error                   =  0;
+        unsigned int release_behaviour          =  any_release_behaviour;
+        unsigned int robustness                 =  no_robustness;
+        unsigned int major_version              =  1;
+        unsigned int minor_version              =  1;
+        unsigned int creation_api               =  native_context_api;
+        unsigned int client_api                 =  opengl_api;
+        unsigned int stereoscopic               =  0;
+        unsigned int multisample                =  0;
+        unsigned int auxiliary_buffers          =  0;
+        unsigned int accumulation_alpha_bits    = -1;
+        unsigned int accumulation_green_bits    = -1;
+        unsigned int accumulation_blue_bits     = -1;
+        unsigned int accumulation_red_bits      = -1;
+        unsigned int stencil_bits               =  8;
+        unsigned int depth_bits                 = 24;
+        unsigned int alpha_bits                 =  8;
+        unsigned int blue_bits                  =  8;
+        unsigned int green_bits                 =  8;
+        unsigned int red_bits                   =  8;
 
         // Constructs a new win32 wgl configuration.
-        explicit _win32_wgl_config();
+        explicit _win32_wgl_config() = default;
 
         // Copy constructor.
         _win32_wgl_config(const _win32_wgl_config& other);
