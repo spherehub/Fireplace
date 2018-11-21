@@ -43,9 +43,6 @@ namespace fireplace {
         // A possible cause for this error.
         _error cause;
 
-        // A numeric representation of this error.
-        unsigned long code;
-
         // The message of this error.
         std::wstring message;
 
@@ -53,7 +50,7 @@ namespace fireplace {
         explicit _error();
 
         // Constructs an error with the given cause, code, and message.
-        explicit _error(_error cause, unsigned long code, std::wstring message);
+        explicit _error(_error cause, std::wstring message);
 
         // Copy constructor.
         _error(const _error& other);

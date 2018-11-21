@@ -44,13 +44,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 36
-
-// Known Fireplace errors.
-#define WIN32_ERROR             0x01001000
-#define FAILED_INITIALIZATION   0x01001200
-#define FAILED_TERMINATION      0x01001201
-#define WINDOW_ERROR            0x01001202
+#define FIREPLACE_PATCH 37
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
