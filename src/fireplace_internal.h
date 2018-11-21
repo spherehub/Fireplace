@@ -109,6 +109,11 @@ namespace fireplace {
         // A map of user pointers to names.
         std::unordered_map<std::string, handle> user_pointers;
 
+    #ifdef _WIN32
+        // The windows necessary library.
+        _win32_library win32;
+    #endif
+
         // Constructs a new instance of the library.
         explicit _fireplace_library();
 
