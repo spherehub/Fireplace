@@ -89,6 +89,9 @@ namespace fireplace {
 
         // Deconstructs this library.
         ~_win32_library();
+
+        // Gets the recent error produced by Windows.
+        static std::wstring last_error();
     };
 
     // Closes the given window.
