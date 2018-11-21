@@ -31,7 +31,6 @@ fireplace::frame::frame() :
 // Constructs a window with the given unicode title.
 fireplace::frame::frame(std::wstring title) :
     m_handle(nullptr),
-    m_open(false),
     m_context(nullptr)
 {
 #ifdef _WIN32
@@ -47,7 +46,6 @@ fireplace::frame::frame(std::wstring title) :
 // Copy constructor.
 fireplace::frame::frame(const frame& other) :
     m_handle(std::copy(other.m_handle)),
-    m_open(std::copy(other.m_open)),
     m_context(std::copy(other.m_context))
 {
 }
@@ -55,7 +53,6 @@ fireplace::frame::frame(const frame& other) :
 // Move constructor.
 fireplace::frame::frame(frame&& other) :
     m_handle(nullptr),
-    m_open(false),
     m_context(nullptr)
 {
     this->swap(other);
@@ -75,10 +72,8 @@ fireplace::frame& fireplace::frame::operator=(frame other) {
 // Closes this window. This releases some memory so it is non-const.
 void fireplace::frame::close() {
 #ifdef _WIN32
-    _win32_close(m_handle);
+    _win32_destroy_window(m_handle);
 #endif
-
-    m_open = false;
 }
 
 // Disables this window.
@@ -158,7 +153,9 @@ bool fireplace::frame::is_minimized() const {
 
 // Returns whether or not this window is open.
 bool fireplace::frame::is_open() const {
-    return m_open;
+#ifdef _WIN32
+    return _win32_is_window_open(m_handle);
+#endif
 }
 
 // Makes this window current.
@@ -222,6 +219,12 @@ void fireplace::frame::swap_buffers() const {
 #ifdef _WIN32
 // Unimplementable right now.
 #endif
+}
+
+// Swaps this window with the given window.
+void fireplace::frame::swap(frame& other) {
+    std::swap(m_handle, other.m_handle);
+    std::swap(m_context, other.m_context);
 }
 
 // Gets the title of this window.

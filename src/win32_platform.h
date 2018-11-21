@@ -94,11 +94,8 @@ namespace fireplace {
         static std::wstring last_error();
     };
 
-    // Closes the given window.
-    void _win32_close(handle _window);
-
     // Creates a window with a name.
-    void _win32_create_window(handle _window, const wchar_t* title);
+    void _win32_create_window(handle _window, const wchar_t* title, frame* _frame);
 
     // Destroys a given window.
     void _win32_destroy_window(handle _window);
@@ -132,6 +129,9 @@ namespace fireplace {
 
     // Checks if the given window is minimized.
     bool _win32_is_minimized(handle _window);
+
+    // Checks if the given window is open still.
+    bool _win32_is_window_open(handle _window);
 
     // Maximizes the given window.
     void _win32_maximize(handle _window);

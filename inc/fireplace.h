@@ -44,7 +44,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 31
+#define FIREPLACE_PATCH 32
 
 // Known Fireplace errors.
 #define FAILED_INITIALIZATION   0x01001200
@@ -138,10 +138,7 @@ namespace fireplace {
     class frame final {
         // Handle to the underlying window.
         handle m_handle;
-
-        // Tells whether or not this window is open.
-        bool m_open;
-
+        
         // Handle to the underlying context of this window.
         handle m_context;
 
