@@ -44,7 +44,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 29
+#define FIREPLACE_PATCH 30
 
 // Known Fireplace errors.
 #define FAILED_INITIALIZATION   0x01001200

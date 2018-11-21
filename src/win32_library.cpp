@@ -19,13 +19,11 @@ fireplace::_win32_library::_win32_library() :
     wndcls.style            = CS_HREDRAW | CS_OWNDC | CS_VREDRAW;
 
     if (!::RegisterClasseEx(&wndcls)) {
-        fireplace::_error err(
+        _firelib.lib_errors.push(fireplace::_error(
             fireplace::_error(nullptr, err_code, _win32_library::last_error()),
             FAILED_INITIALIZATION,
             L"Failed to register window class."
-        );
-
-        _firelib.lib_errors.push(err);
+        ));
         return;
     }
 }
@@ -33,13 +31,11 @@ fireplace::_win32_library::_win32_library() :
 // Deconstructs this library.
 fireplace::_win32_library::~_win32_library() {
     if (!::UnregisterClass(FIREPLACE_WIN32CLASSNAME, GetModuleHandle(NULL))) {
-        fireplace::_error err(
+        _firelib.lib_errors.push(fireplace::_error(
             fireplace::_error(nullptr, err_code, _win32_library::last_error()),
             FAILED_TERMINATION,
             L"Failed to unregister window class."
-        );
-
-        _firelib.lib_errors.push(err);
+        ));
         return;
     }
 }
