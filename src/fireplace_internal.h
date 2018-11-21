@@ -41,7 +41,7 @@ namespace fireplace {
      */
     struct _error final {
         // A possible cause for this error.
-        _error* cause;
+        _error cause;
 
         // A numeric representation of this error.
         unsigned long code;
@@ -65,7 +65,7 @@ namespace fireplace {
         ~_error();
 
         // Copy-swap idiom operator.
-        _error& operator=(_error& other);
+        _error& operator=(_error other);
     };
 
     /*
@@ -92,7 +92,7 @@ namespace fireplace {
         ~_info();
 
         // Copy-swap idiom operator.
-        _info& operator=(_info& other);
+        _info& operator=(_info other);
     };
 
     /*
