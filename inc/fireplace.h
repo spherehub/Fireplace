@@ -44,7 +44,11 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 21
+#define FIREPLACE_PATCH 22
+
+// Known Fireplace errors.
+#define FAILED_INITIALIZATION   0x01001200
+#define FAILED_TERMINATION      0x01001201
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
