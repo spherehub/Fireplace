@@ -44,7 +44,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 35
+#define FIREPLACE_PATCH 36
 
 // Known Fireplace errors.
 #define WIN32_ERROR             0x01001000

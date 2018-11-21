@@ -267,6 +267,108 @@ namespace fireplace {
     typedef       HGLRC     (WINAPI *PFNWGLGETPIXELFORMATATTRIBIVARB)(HDC, GLint, GLint, GLuint, const GLint*, GLint*);
 
     /*
+     * This structure represents the OpenGL library for Windows, or in other
+     * words WGL. It will contain library specifics, like things from
+     * opengl32.dll and possibly other things.
+     */
+    struct _win32_wgl_library final {
+        /*
+         * A handle to the opengl32.dll instance that will be used to get
+         * function pointers for wgl calls.
+         */
+        HMODULE gl_instance;
+
+        // Tells if wgl has been initialized.
+        bool wgl_initialized;
+
+        // Necessary function pointers.
+        PFNWGLCREATECONTEXT             wgl_create_context;
+        PFNWGLDELETECONTEXT             wgl_delete_context;
+        PFNWGLGETPROCADDRESS            wgl_get_proc_address;
+        PFNWGLGETCURRENTDC              wgl_get_current_dc;
+        PFNWGLGETCURRENTCONTEXT         wgl_get_current_context;
+        PFNWGLMAKECURRENT               wgl_make_current;
+        PFNWGLSHARELISTS                wgl_share_lists;
+        PFNWGLSWAPINTERVALEXT           wgl_swap_interval_ext;
+        PFNWGLCREATECONTEXTATTRIBSARB   wgl_create_context_attribs_arb;
+        PFNWGLGETEXTENSIONSSTRINGARB    wgl_get_extensions_string_arb;
+        PFNWGLGETEXTENSIONSSTRINGEXT    wgl_get_extensions_string_ext;
+        PFNWGLGETPIXELFORMATATTRIBIVARB wgl_get_pixel_format_attribiv_arb;
+
+        /*
+         * Things needed in order to set up a context the way the user wants it
+         * to be. More things may be added later.
+         */
+        GLboolean ARB_context_flush_control;
+        GLboolean ARB_create_context;
+        GLboolean ARB_create_context_robustness;
+        GLboolean ARB_create_context_no_error;
+        GLboolean ARB_create_context_profile;
+        GLboolean ARB_multisample;
+        GLboolean ARB_pixel_format;
+        GLboolean EXT_create_context_es2_profile;
+        GLboolean EXT_swap_control;
+
+        // Constructs a new win32 wgl library.
+        explicit _win32_wgl_library();
+
+        // Disallow copy construction.
+        _win32_wgl_library(const _win32_wgl_library& other) = delete;
+
+        // Disallow move construction.
+        _win32_wgl_library(_win32_wgl_library&& other) = delete;
+
+        // Deconstructs this library.
+        ~_win32_wgl_library();
+    };
+
+    /*
+     * This structure defines a configuration for WGL specifically. These are
+     * used in the initialization of WGL as well as the creation of a WGL
+     * context. Values are set by default to their defaults.
+     */
+    struct _win32_wgl_config final {
+        unsigned int profile_attrib                    =  any_profile;
+        unsigned int debug_attrib                      =  0;
+        unsigned int forward_compatible_attrib         =  0;
+        unsigned int no_error_attrib                   =  0;
+        unsigned int release_behaviour_attrib          =  any_release_behaviour;
+        unsigned int robustness_attrib                 =  no_robustness;
+        unsigned int major_version_attrib              =  1;
+        unsigned int minor_version_attrib              =  1;
+        unsigned int creation_api_attrib               =  native_context_api;
+        unsigned int client_api_attrib                 =  opengl_api;
+        unsigned int stereoscopic_attrib               =  0;
+        unsigned int multisample_attrib                =  0;
+        unsigned int auxiliary_buffers_attrib          =  0;
+        unsigned int accumulation_alpha_bits_attrib    = -1;
+        unsigned int accumulation_green_bits_attrib    = -1;
+        unsigned int accumulation_blue_bits_attrib     = -1;
+        unsigned int accumulation_red_bits_attrib      = -1;
+        unsigned int stencil_bits_attrib               =  8;
+        unsigned int depth_bits_attrib                 = 24;
+        unsigned int alpha_bits_attrib                 =  8;
+        unsigned int blue_bits_attrib                  =  8;
+        unsigned int green_bits_attrib                 =  8;
+        unsigned int red_bits_attrib                   =  8;
+
+        // Constructs a new win32 wgl configuration.
+        explicit _win32_wgl_config();
+
+        // Copy constructor.
+        _win32_wgl_config(const _win32_wgl_config& other);
+
+        // Move constructor.
+        _win32_wgl_config(_win32_wgl_config&& other);
+
+        // Deconstructs this win32 wgl config, is default deconstructor.
+        ~_win32_wgl_config() = default;
+
+        // Copy-swap idiom assignment operator.
+        _win32_wgl_config& operator=(_win32_wgl_config other);
+    };
+
+    /*
      * This structure represents an OpenGL context for Windows. More
      * Specifically, a WGL context that can be used to later to load modern
      * OpenGL function pointers by a loading library like GLEW or GLAD.

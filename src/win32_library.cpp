@@ -62,7 +62,7 @@ fireplace::_win32_library::~_win32_library() {
     }
 }
 
-//
+// Gets the last error registered by windows.
 void fireplace::_win32_library::last_error() {
     // Windows cause for this error.
     LPWSTR message_buffer   = nullptr;

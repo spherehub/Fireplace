@@ -112,7 +112,13 @@ namespace fireplace {
     #ifdef _WIN32
         // The windows necessary library.
         _win32_library win32;
-    #endif
+
+    #ifdef _FIREPLACE_OPENGL
+        // The window necessary wgl library.
+        _win32_wgl_library wgl;
+
+    #endif // _FIREPLACE_OPENGL
+    #endif // _WIN32
 
         // Constructs a new instance of the library.
         explicit _fireplace_library();
