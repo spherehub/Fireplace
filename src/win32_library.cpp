@@ -42,7 +42,7 @@ fireplace::_win32_library::_win32_library() :
 
     if (!::RegisterClasseEx(&wndcls)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, err_code, _win32_library::last_error()),
+            fireplace::_error(nullptr, WIN32_ERROR, _win32_library::last_error()),
             FAILED_INITIALIZATION,
             L"Failed to register window class."
         ));
@@ -54,7 +54,7 @@ fireplace::_win32_library::_win32_library() :
 fireplace::_win32_library::~_win32_library() {
     if (!::UnregisterClass(FIREPLACE_WIN32CLASSNAME, GetModuleHandle(NULL))) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, err_code, _win32_library::last_error()),
+            fireplace::_error(nullptr, WIN32_ERROR, _win32_library::last_error()),
             FAILED_TERMINATION,
             L"Failed to unregister window class."
         ));
@@ -63,7 +63,7 @@ fireplace::_win32_library::~_win32_library() {
 }
 
 //
-std::wstring fireplace::_win32_library::last_error() {
+void fireplace::_win32_library::last_error() {
     // Windows cause for this error.
     LPWSTR message_buffer   = nullptr;
     DWORD err_code          = ::GetLastError();
