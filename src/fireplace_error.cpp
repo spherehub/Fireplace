@@ -44,7 +44,7 @@ fireplace::_error::~_error() {
 }
 
 // Copy-swap idiom operator.
-fireplace::_error::operator=(_error other) {
+fireplace::_error& fireplace::_error::operator=(_error other) {
     this->cause     = other.cause;
     this->code      = other.code;
     this->message   = other.message;
