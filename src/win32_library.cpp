@@ -70,7 +70,7 @@ fireplace::_win32_library::~_win32_library() {
         fireplace::_error err(
             cause,
             FAILED_TERMINATION,
-            L"Failed to register window class."
+            L"Failed to unregister window class."
         );
 
         _firelib.lib_errors.push(err);
