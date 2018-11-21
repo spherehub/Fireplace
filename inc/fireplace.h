@@ -44,7 +44,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 38
+#define FIREPLACE_PATCH 39
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
@@ -91,18 +91,20 @@
 #define context_creation_api        0x1009
 #define context_client_api          0x100A
 #define stereoscopic                0x100B
-#define multisample                 0x100C
+#define samples                     0x100C
 #define auxiliary_buffers           0x100D
-#define accumulation_alpha_bits     0x100E
-#define accumulation_green_bits     0x100F
-#define accumulation_blue_bits      0x1010
-#define accumulation_red_bits       0x1011
-#define stencil_bits                0x1012
-#define depth_bits                  0x1013
-#define alpha_bits                  0x1014
-#define blue_bits                   0x1015
-#define green_bits                  0x1016
-#define red_bits                    0x1017
+#define double_buffered             0x100E
+#define transparent                 0x100F
+#define accumulation_alpha_bits     0x1010
+#define accumulation_green_bits     0x1011
+#define accumulation_blue_bits      0x1013
+#define accumulation_red_bits       0x1014
+#define stencil_bits                0x1015
+#define depth_bits                  0x1016
+#define alpha_bits                  0x1017
+#define blue_bits                   0x1018
+#define green_bits                  0x1019
+#define red_bits                    0x101A
 
 // OpenGL Attribute values constants.
 #define no_api                      0x1100

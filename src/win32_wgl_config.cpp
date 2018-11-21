@@ -30,7 +30,7 @@ fireplace::_win32_wgl_config::_win32_wgl_config(
 ) :
     profile(std::copy(other.profile)),
     debug(std::copy(other.debug)),
-    forward_compatibility(std::copy(other.forward_compatibility)),
+    forward_compat(std::copy(other.forward_compat)),
     no_error(std::copy(other.no_error)),
     release_behaviour(std::copy(other.release_behaviour)),
     robustness(std::copy(other.robustness)),
@@ -39,18 +39,21 @@ fireplace::_win32_wgl_config::_win32_wgl_config(
     creation_api(std::copy(other.creation_api)),
     client_api(std::copy(other.client_api)),
     stereoscopic(std::copy(other.stereoscopic)),
-    multisample(std::copy(other.multisample)),
+    samples(std::copy(other.samples)),
     auxiliary_buffers(std::copy(other.auxiliary_buffers)),
-    accumulation_alpha_bits(std::copy(other.accumulation_alpha_bits)),
-    accumulation_blue_bits(std::copy(other.accumulation_blue_bits)),
-    accumulation_green_bits(std::copy(other.accumulation_green_bits)),
-    accumulation_red_bits(std::copy(other.accumulation_red_bits)),
+    double_buffered(std::copy(other.double_buffered)),
+    transparent(std::copy(other.transparent)),
+    accum_alpha_bits(std::copy(other.accum_alpha_bits)),
+    accum_blue_bits(std::copy(other.accum_blue_bits)),
+    accum_green_bits(std::copy(other.accum_green_bits)),
+    accum_red_bits(std::copy(other.accum_red_bits)),
     stencil_bits(std::copy(other.stencil_bits)),
     depth_bits(std::copy(other.depth_bits)),
     alpha_bits(std::copy(other.alpha_bits)),
     blue_bits(std::copy(other.blue_bits)),
     green_bits(std::copy(other.green_bits)),
-    red_bits(std::copy(other.red_bits))
+    red_bits(std::copy(other.red_bits)),
+    handle(std::copy(other.handle))
 {
 }
 
@@ -60,7 +63,7 @@ fireplace::_win32_wgl_config::_win32_wgl_config(
 ) :
     profile(0),
     debug(0),
-    forward_compatibility(0),
+    forward_compat(0),
     no_error(0),
     release_behaviour(0),
     robustness(0),
@@ -69,22 +72,25 @@ fireplace::_win32_wgl_config::_win32_wgl_config(
     creation_api(0),
     client_api(0),
     stereoscopic(0),
-    multisample(0),
+    samples(0),
     auxiliary_buffers(0),
-    accumulation_alpha_bits(0),
-    accumulation_blue_bits(0),
-    accumulation_green_bits(0),
-    accumulation_red_bits(0),
+    double_buffered(0),
+    transparent(0),
+    accum_alpha_bits(0),
+    accum_blue_bits(0),
+    accum_green_bits(0),
+    accum_red_bits(0),
     stencil_bits(0),
     depth_bits(0),
     alpha_bits(0),
     blue_bits(0),
     green_bits(0),
-    red_bits(0)
+    red_bits(0),
+    handle(0)
 {
     std::swap(profile, other.profile);
     std::swap(debug, other.debug);
-    std::swap(forward_compatibility, other.forward_compatibility);
+    std::swap(forward_compat, other.forward_compat);
     std::swap(no_error, other.no_error);
     std::swap(release_behaviour, other.release_behaviour);
     std::swap(robustness, other.robustness);
@@ -93,18 +99,21 @@ fireplace::_win32_wgl_config::_win32_wgl_config(
     std::swap(creation_api, other.creation_api);
     std::swap(client_api, other.client_api);
     std::swap(stereoscopic, other.stereoscopic);
-    std::swap(multisample, other.multisample);
+    std::swap(samples, other.samples);
     std::swap(auxiliary_buffers, other.auxiliary_buffers);
-    std::swap(accumulation_alpha_bits, other.accumulation_alpha_bits);
-    std::swap(accumulation_blue_bits, other.accumulation_blue_bits);
-    std::swap(accumulation_green_bits, other.accumulation_green_bits);
-    std::swap(accumulation_red_bits, other.accumulation_red_bits);
+    std::swap(double_buffered, other.double_buffered);
+    std::swap(transparent, other.transparent);
+    std::swap(accum_alpha_bits, other.accum_alpha_bits);
+    std::swap(accum_blue_bits, other.accum_blue_bits);
+    std::swap(accum_green_bits, other.accum_green_bits);
+    std::swap(accum_red_bits, other.accum_red_bits);
     std::swap(stencil_bits, other.stencil_bits);
     std::swap(depth_bits, other.depth_bits);
     std::swap(alpha_bits, other.alpha_bits);
     std::swap(blue_bits, other.blue_bits);
     std::swap(green_bits, other.green_bits);
     std::swap(red_bits, other.red_bits);
+    std::swap(handle, other.handle);
 }
 
 // Copy-swap idiom assignment operator.
@@ -113,7 +122,7 @@ fireplace::_win32_wgl_config& fireplace::_win32_wgl_config::operator(
 ) {
     std::swap(profile, other.profile);
     std::swap(debug, other.debug);
-    std::swap(forward_compatibility, other.forward_compatibility);
+    std::swap(forward_compat, other.forward_compat);
     std::swap(no_error, other.no_error);
     std::swap(release_behaviour, other.release_behaviour);
     std::swap(robustness, other.robustness);
@@ -122,18 +131,21 @@ fireplace::_win32_wgl_config& fireplace::_win32_wgl_config::operator(
     std::swap(creation_api, other.creation_api);
     std::swap(client_api, other.client_api);
     std::swap(stereoscopic, other.stereoscopic);
-    std::swap(multisample, other.multisample);
+    std::swap(samples, other.samples);
     std::swap(auxiliary_buffers, other.auxiliary_buffers);
-    std::swap(accumulation_alpha_bits, other.accumulation_alpha_bits);
-    std::swap(accumulation_blue_bits, other.accumulation_blue_bits);
-    std::swap(accumulation_green_bits, other.accumulation_green_bits);
-    std::swap(accumulation_red_bits, other.accumulation_red_bits);
+    std::swap(double_buffered, other.double_buffered);
+    std::swap(transparent, other.transparent);
+    std::swap(accum_alpha_bits, other.accum_alpha_bits);
+    std::swap(accum_blue_bits, other.accum_blue_bits);
+    std::swap(accum_green_bits, other.accum_green_bits);
+    std::swap(accum_red_bits, other.accum_red_bits);
     std::swap(stencil_bits, other.stencil_bits);
     std::swap(depth_bits, other.depth_bits);
     std::swap(alpha_bits, other.alpha_bits);
     std::swap(blue_bits, other.blue_bits);
     std::swap(green_bits, other.green_bits);
     std::swap(red_bits, other.red_bits);
+    std::swap(handle, other.handle);
 }
 
 #endif

@@ -328,29 +328,32 @@ namespace fireplace {
      * context. Values are set by default to their defaults.
      */
     struct _win32_wgl_config final {
-        unsigned int profile                    =  any_profile;
-        unsigned int debug                      =  0;
-        unsigned int forward_compatibility      =  0;
-        unsigned int no_error                   =  0;
-        unsigned int release_behaviour          =  any_release_behaviour;
-        unsigned int robustness                 =  no_robustness;
-        unsigned int major_version              =  1;
-        unsigned int minor_version              =  1;
-        unsigned int creation_api               =  native_context_api;
-        unsigned int client_api                 =  opengl_api;
-        unsigned int stereoscopic               =  0;
-        unsigned int multisample                =  0;
-        unsigned int auxiliary_buffers          =  0;
-        unsigned int accumulation_alpha_bits    = -1;
-        unsigned int accumulation_green_bits    = -1;
-        unsigned int accumulation_blue_bits     = -1;
-        unsigned int accumulation_red_bits      = -1;
-        unsigned int stencil_bits               =  8;
-        unsigned int depth_bits                 = 24;
-        unsigned int alpha_bits                 =  8;
-        unsigned int blue_bits                  =  8;
-        unsigned int green_bits                 =  8;
-        unsigned int red_bits                   =  8;
+        unsigned int profile            =  any_profile;
+        unsigned int debug              =  0;
+        unsigned int forward_compat     =  0;
+        unsigned int no_error           =  0;
+        unsigned int release_behaviour  =  any_release_behaviour;
+        unsigned int robustness         =  no_robustness;
+        unsigned int major_version      =  1;
+        unsigned int minor_version      =  1;
+        unsigned int creation_api       =  native_context_api;
+        unsigned int client_api         =  opengl_api;
+        unsigned int stereoscopic       =  0;
+        unsigned int samples            =  0;
+        unsigned int auxiliary_buffers  =  0;
+        unsigned int double_buffered    =  1;
+        unsigned int transparent        =  0;
+        unsigned int accum_alpha_bits   = -1;
+        unsigned int accum_green_bits   = -1;
+        unsigned int accum_blue_bits    = -1;
+        unsigned int accum_red_bits     = -1;
+        unsigned int stencil_bits       =  8;
+        unsigned int depth_bits         = 24;
+        unsigned int alpha_bits         =  8;
+        unsigned int blue_bits          =  8;
+        unsigned int green_bits         =  8;
+        unsigned int red_bits           =  8;
+        unsigned int handle             =  0;
 
         // Constructs a new win32 wgl configuration.
         explicit _win32_wgl_config() = default;
@@ -387,15 +390,13 @@ namespace fireplace {
         HGLRC hrc;
 
         /*
-         * A pixel format descriptor for this context. While we'd have to create
-         * a brand new context to change the pixel format descriptor of this
-         * rendering context, it is handy to have so that we can easily get
-         * frame buffer attribs for the user easier.
+         * The configuration for this context. Shares similar traits to the PFD.
+         * Although this is preferred over the PFD.
          */
-        PFD pfd;
+        _win32_wgl_config config;
 
         // Constructs a new _win32_wgl_context.
-        explicit _win32_wgl_context();
+        explicit _win32_wgl_context(handle _window);
 
         // Disallow copy construction, this is temporary.
         _win32_wgl_context(const _win32_wgl_context& other) = delete;

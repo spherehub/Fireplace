@@ -24,9 +24,6 @@
 #define ASHWND(handle) \
     ((HWND)handle)
 
-#define ASHANDLE(_handle) \
-    ((fireplace::handle)_handle)
-
 // Closes the given window.
 void fireplace::_win32_close(fireplace::handle _window) {
     fireplace::_win32_destroy_window(_window);
@@ -430,4 +427,5 @@ std::wstring fireplace::_win32_title(fireplace::handle _window) {
     return std::wstring(title, length);
 }
 
+#undef ASHWND
 #endif
