@@ -67,6 +67,9 @@
 #endif
 
 namespace fireplace {
+    // Callback for the window.
+    LRESULT CALLBACK _window_procedure(HWND, UINT, WPARAM, LPARAM);
+
     /*
      * This structure represents the windows specific library of fireplace. It
      * contains function pointers and important windows based information.
@@ -86,12 +89,6 @@ namespace fireplace {
 
         // Deconstructs this library.
         ~_win32_library();
-
-        // Registers the window class for this library.
-        bool register_window_class();
-
-        // Unregisters the window class for this library.
-        bool unregister_window_class();
     };
 
     // Closes the given window.
