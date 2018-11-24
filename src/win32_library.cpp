@@ -42,7 +42,7 @@ fireplace::_win32_library::_win32_library() :
 
     if (!::RegisterClassEx(&wndcls)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Failed to register window class."
         ));
         return;
@@ -53,7 +53,7 @@ fireplace::_win32_library::_win32_library() :
 fireplace::_win32_library::~_win32_library() {
     if (!::UnregisterClass(FIREPLACE_WIN32CLASSNAME, GetModuleHandle(NULL))) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Failed to unregister window class."
         ));
         return;
