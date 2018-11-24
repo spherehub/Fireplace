@@ -24,13 +24,13 @@
     ((HWND)_handle)
 
 // Gets the specified attribute of the specified format.
-int get_pixel_format_attrib(HDC device, int format, int attrib) {
+int fireplace::get_pixel_format_attrib(HDC device, int format, int attrib) {
     int value = 0;
 
-    if (!ARB_pixel_format)
+    if (!_firelib.wgl.ARB_pixel_format)
         return 0;
 
-    if (!wgl_get_pixel_format_attribiv_arb(
+    if (!_firelib.wgl.get_pixel_format_attribiv_arb(
         device,
         format,
         0,
@@ -43,14 +43,17 @@ int get_pixel_format_attrib(HDC device, int format, int attrib) {
 }
 
 // Chooses a pixel format that best represents what the user wants.
-int choose_pixel_format(HDC device, fireplace::_win32_wgl_config expected) {
+int fireplace::choose_pixel_format(
+    HDC device,
+    fireplace::_win32_wgl_config expected
+) {
     int pixel_format = 0;
     int native_count = 0;
     int usable_count = 0;
 
     // Get the number of possible pixel formats that we could get.
     if (_firelib.wgl.ARB_pixel_format) {
-        native_count = _firelib.wgl.get_pixel_format_attrib(
+        native_count = get_pixel_format_attrib(
             device,
             1,
             WGL_NUMBER_PIXEL_FORMATS_ARB
@@ -69,44 +72,44 @@ int choose_pixel_format(HDC device, fireplace::_win32_wgl_config expected) {
 
         if (_firelib.wgl.ARB_pixel_format) {
             if (
-                !_firelib.wgl.get_pixel_format_attrib(device, n, WGL_SUPPORT_OPENGL_ARB) ||
-                !_firelib.wgl.get_pixel_format_attrib(device, n, WGL_DRAW_TO_WINDOW_ARB)
+                !get_pixel_format_attrib(device, n, WGL_SUPPORT_OPENGL_ARB) ||
+                !get_pixel_format_attrib(device, n, WGL_DRAW_TO_WINDOW_ARB)
             ) continue;
 
             if (
-                _firelib.wgl.get_pixel_format_attrib(device, n, WGL_PIXEL_TYPE_ARB) !=
+                get_pixel_format_attrib(device, n, WGL_PIXEL_TYPE_ARB) !=
                     WGL_TYPE_RGBA_ARB
             ) continue;
 
             if (
-                _firelib.wgl.get_pixel_format_attrib(device, n, WGL_ACCELERATION_ARB) ==
+                get_pixel_format_attrib(device, n, WGL_ACCELERATION_ARB) ==
                     WGL_NO_ACCELERATION_ARB
             ) continue;
 
-            _current->red_bits          = _firelib.wgl.get_pixel_format_attrib(device, n, WGL_RED_BITS_ARB);
-            _current->green_bits        = _firelib.wgl.get_pixel_format_attrib(device, n, WGL_GREEN_BITS_ARB);
-            _current->blue_bits         = _firelib.wgl.get_pixel_format_attrib(device, n, WGL_BLUE_BITS_ARB);
-            _current->alpha_bits        = _firelib.wgl.get_pixel_format_attrib(device, n, WGL_ALPHA_BITS_ARB);
-            _current->depth_bits        = _firelib.wgl.get_pixel_format_attrib(device, n, WGL_DEPTH_BITS_ARB);
-            _current->stencil_bits      = _firelib.wgl.get_pixel_format_attrib(device, n, WGL_STENCIL_BITS_ARB);
-            _current->accum_red_bits    = _firelib.wgl.get_pixel_format_attrib(device, n, WGL_ACCUM_RED_BITS_ARB);
-            _current->accum_green_bits  = _firelib.wgl.get_pixel_format_attrib(device, n, WGL_ACCUM_GREEN_BITS_ARB);
-            _current->accum_blue_bits   = _firelib.wgl.get_pixel_format_attrib(device, n, WGL_ACCUM_BLUE_BITS_ARB);
-            _current->accum_alpha_bits  = _firelib.wgl.get_pixel_format_attrib(device, n, WGL_ACCUM_ALPHA_BITS_ARB);
-            _current->auxiliary_buffers = _firelib.wgl.get_pixel_format_attrib(device, n, WGL_AUX_BUFFERS_ARB);
+            _current->red_bits          = get_pixel_format_attrib(device, n, WGL_RED_BITS_ARB);
+            _current->green_bits        = get_pixel_format_attrib(device, n, WGL_GREEN_BITS_ARB);
+            _current->blue_bits         = get_pixel_format_attrib(device, n, WGL_BLUE_BITS_ARB);
+            _current->alpha_bits        = get_pixel_format_attrib(device, n, WGL_ALPHA_BITS_ARB);
+            _current->depth_bits        = get_pixel_format_attrib(device, n, WGL_DEPTH_BITS_ARB);
+            _current->stencil_bits      = get_pixel_format_attrib(device, n, WGL_STENCIL_BITS_ARB);
+            _current->accum_red_bits    = get_pixel_format_attrib(device, n, WGL_ACCUM_RED_BITS_ARB);
+            _current->accum_green_bits  = get_pixel_format_attrib(device, n, WGL_ACCUM_GREEN_BITS_ARB);
+            _current->accum_blue_bits   = get_pixel_format_attrib(device, n, WGL_ACCUM_BLUE_BITS_ARB);
+            _current->accum_alpha_bits  = get_pixel_format_attrib(device, n, WGL_ACCUM_ALPHA_BITS_ARB);
+            _current->auxiliary_buffers = get_pixel_format_attrib(device, n, WGL_AUX_BUFFERS_ARB);
 
-            if (_firelib.wgl.get_pixel_format_attrib(device, n, WGL_STEREO_ARB))
+            if (get_pixel_format_attrib(device, n, WGL_STEREO_ARB))
                 _current->stereoscopic = true;
 
-            if (_firelib.wgl.get_pixel_format_attrib(device, n, WGL_DOUBLE_BUFFER_ARB))
+            if (get_pixel_format_attrib(device, n, WGL_DOUBLE_BUFFER_ARB))
                 _current->double_buffered = true;
 
             if (_firelib.wgl.ARB_multisample)
-                _current->samples = _firelib.wgl.get_pixel_format_attrib(device, n, WGL_SAMPLES_ARB);
+                _current->samples = get_pixel_format_attrib(device, n, WGL_SAMPLES_ARB);
         } else {
             PFD pfd;
 
-            if (!::Describe(device, n, sizeof(PFD), &pfd)) continue;
+            if (!::DescribePixelFormat(device, n, sizeof(PFD), &pfd)) continue;
 
             if (
                 !(pfd.dwFlags & PFD_DRAW_TO_WINDOW) ||
@@ -121,17 +124,17 @@ int choose_pixel_format(HDC device, fireplace::_win32_wgl_config expected) {
             if (pfd.iPixelType != PFD_TYPE_RGBA)
                 continue;
 
-            _current->red_bits                  = pfd.cRedBits;
-            _current->green_bits                = pfd.cGreenBits;
-            _current->blue_bits                 = pfd.cBlueBits;
-            _current->alpha_bits                = pfd.cAlphaBits;
-            _current->depth_bits                = pfd.cDepthBits;
-            _current->stencil_bits              = pfd.cStencilBits;
-            _current->accumulation_red_bits     = pfd.cAccumRedBits;
-            _current->accumulation_green_bits   = pfd.cAccumGreenBits;
-            _current->accumulation_blue_bits    = pfd.cAccumBlueBits;
-            _current->accumulation_alpha_bits   = pfd.cAccumAlphaBits;
-            _current->auxiliary_buffers         = pfd.cAuxBuffers;
+            _current->red_bits          = pfd.cRedBits;
+            _current->green_bits        = pfd.cGreenBits;
+            _current->blue_bits         = pfd.cBlueBits;
+            _current->alpha_bits        = pfd.cAlphaBits;
+            _current->depth_bits        = pfd.cDepthBits;
+            _current->stencil_bits      = pfd.cStencilBits;
+            _current->accum_red_bits    = pfd.cAccumRedBits;
+            _current->accum_green_bits  = pfd.cAccumGreenBits;
+            _current->accum_blue_bits   = pfd.cAccumBlueBits;
+            _current->accum_alpha_bits  = pfd.cAccumAlphaBits;
+            _current->auxiliary_buffers = pfd.cAuxBuffers;
 
             if (pfd.dwFlags & PFD_STEREO)
                 _current->stereoscopic = true;
@@ -147,7 +150,6 @@ int choose_pixel_format(HDC device, fireplace::_win32_wgl_config expected) {
     // Check that there are usable configs.
     if (!usable_count) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"No suitable match for your requested frame buffer configuration."
         ));
         delete[] usable_configs;
@@ -165,7 +167,7 @@ int choose_pixel_format(HDC device, fireplace::_win32_wgl_config expected) {
 
     // Find closest match.
     for (int i = 0; i < usable_count; i++) {
-        _final = usable_count + i;
+        _final = usable_configs + i;
 
         // They must both either be double_buffered or not.
         if (expected.double_buffered != _final->double_buffered) continue;
@@ -181,7 +183,7 @@ int choose_pixel_format(HDC device, fireplace::_win32_wgl_config expected) {
 
         if (expected.samples > 0 && _final->samples == 0)   missing++;
         if (expected.stereoscopic != _final->stereoscopic)  missing++;
-        if (expected.transparent != current->transparent)   missing++;
+        if (expected.transparent != _final->transparent)   missing++;
 
         color_diff = 0;
         if (expected.red_bits != -1) {
@@ -274,23 +276,22 @@ int choose_pixel_format(HDC device, fireplace::_win32_wgl_config expected) {
     // Confirm closest match of some kind.
     if (!closest) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Failed to find closest match to requested frame buffer config."
         ));
         delete[] usable_configs;
         return 0;
     }
 
-    format = closest->handle;
+    pixel_format = closest->handle;
     delete[] usable_configs;
-    return format;
+    return pixel_format;
 }
 
 // Constructs a new win32 wgl context.
 fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
     if (!(hdc = ::GetDC(ASHWND(_window)))) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Failed to get window device context."
         ));
         return;
@@ -301,7 +302,6 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
     // Confirm format
     if (!format) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Failed to pick appropriate pixel format."
         ));
         return;
@@ -313,7 +313,7 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
     // Attempt to describe pixel format.
     if (!::DescribePixelFormat(hdc, format, sizeof(PFD), &description)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Failed to describe pixel format."
         ));
         return;
@@ -322,7 +322,7 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
     // Attempt to set pixel format.
     if (!::SetPixelFormat(hdc, format, &description)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Failed to set pixel format."
         ));
         return;
@@ -340,8 +340,7 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
         if (config.forward_compat) {
             if (!_firelib.wgl.ARB_create_context) {
                 _firelib.lib_errors.push(fireplace::_error(
-                    nullptr,
-                    L"A forward compatible context is unavailable.
+                    L"A forward compatible context is unavailable."
                 ));
                 return;
             }
@@ -350,7 +349,6 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
         if (config.profile) {
             if (!_firelib.wgl.ARB_create_context_profile) {
                 _firelib.lib_errors.push(fireplace::_error(
-                    nullptr,
                     L"OpenGL profile requested but is unavailable."
                 ));
                 return;
@@ -363,7 +361,6 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
             !_firelib.wgl.EXT_create_context_es2_profile
         ) {
             _firelib.lib_errors.push(fireplace::_error(
-                nullptr,
                 L"OpenGL ES requested but is unavailable."
             ));
             return;
@@ -373,10 +370,10 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
     if (_firelib.wgl.ARB_create_context) {
         int index   = 0;
         int mask    = 0;
-        int flag    = 0;
+        int flags   = 0;
 
-        if (config.client == opengl_api) {
-            if (config.forward)
+        if (config.client_api == opengl_api) {
+            if (config.forward_compat)
                 flags |= WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB;
             if (config.profile == core_profile)
                 mask |= WGL_CONTEXT_CORE_PROFILE_BIT_ARB;
@@ -452,7 +449,7 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
     // Check that we got out rendering context.
     if (!hrc) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, fireplace::_win32_library::last_error()),
+            fireplace::_error(fireplace::_win32_library::last_error()),
             L"Failed to create rendering context."
         ));
         return;

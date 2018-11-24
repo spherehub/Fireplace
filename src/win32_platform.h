@@ -386,6 +386,12 @@ namespace fireplace {
         _win32_wgl_config& operator=(_win32_wgl_config other);
     };
 
+    //
+    int get_pixel_format_attrib(HDC device, int format, int attrib);
+
+    //
+    int choose_pixel_format(HDC device, _win32_wgl_config expected);
+
     /*
      * This structure represents an OpenGL context for Windows. More
      * Specifically, a WGL context that can be used to later to load modern
