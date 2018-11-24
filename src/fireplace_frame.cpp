@@ -37,7 +37,9 @@ fireplace::frame::frame(std::wstring title) :
     _win32_create_window(m_handle, title.c_str(), this);
 
     if (m_handle) {
-        // create window context.
+    #ifdef _FIREPLACE_OPENGL
+        m_context = new _win32_wgl_context(m_handle);
+    #endif
     }
 #endif
 }
@@ -160,8 +162,11 @@ bool fireplace::frame::is_open() const {
 // Makes this window current.
 void fireplace::frame::make_current() const {
 #ifdef _WIN32
-// Unimplementable right now.
-#endif
+#ifdef _FIREPLACE_OPENGL
+    ((_win32_wgl_context)m_context).make_current();
+
+#endif // _FIREPLACE_OPENGL
+#endif // _WIN32
 }
 
 // Maximizes this window.
@@ -216,8 +221,11 @@ void fireplace::frame::show() const {
 // Swaps this window's frame buffers.
 void fireplace::frame::swap_buffers() const {
 #ifdef _WIN32
-// Unimplementable right now.
-#endif
+#ifdef _FIREPLACE_OPENGL
+    ((_win32_wgl_context)m_context).swap_buffers();
+
+#endif // _FIREPLACE_OPENGL
+#endif // _WIN32
 }
 
 // Swaps this window with the given window.
