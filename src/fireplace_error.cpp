@@ -20,33 +20,32 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-#include "fireplace_internal"
+#include "fireplace_internal.h"
 
 // Constructs a new error.
 fireplace::_error::_error() :
-    cause(nullptr),
+    cause(),
     message(L"")
 {
 }
 
 // Constructs a new error with the given cause, code, and message.
-fireplace::_error::_error(_error _cause, std::wstring _message) :
+fireplace::_error::_error(fireplace::_error _cause, std::wstring _message) :
     cause(_cause),
-    code(_code),
     message(_message)
 {
 }
 
 // Copy constructor.
-fireplace::_error::_error(const _error& other) :
-    cause(std::copy(other.cause)),
-    message(std::copy(other.message))
+fireplace::_error::_error(const fireplace::_error& other) :
+    cause(fireplace::_error(other.cause)),  // Follows deep copy construction.
+    message(other.message)
 {
 }
 
 // Move constructor.
-fireplace::_error::_error(_error&& other) :
-    cause(nullptr),
+fireplace::_error::_error(fireplace::_error&& other) :
+    cause(),
     message(L"")
 {
     std::swap(cause, other.cause);
@@ -55,10 +54,11 @@ fireplace::_error::_error(_error&& other) :
 
 // Deconstructs this error.
 fireplace::_error::~_error() {
+    if (cause) delete cause;
 }
 
 // Copy-swap idiom operator.
-fireplace::_error& fireplace::_error::operator=(_error other) {
+fireplace::_error& fireplace::_error::operator=(fireplace::_error other) {
     this->cause     = other.cause;
     this->message   = other.message;
 }
