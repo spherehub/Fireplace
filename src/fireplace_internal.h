@@ -41,7 +41,7 @@ namespace fireplace {
      */
     struct _error final {
         // A possible cause for this error.
-        fireplace::_error cause;
+        _error* cause;
 
         // The message of this error.
         std::wstring message;
@@ -53,19 +53,19 @@ namespace fireplace {
         explicit _error(std::wstring message);
 
         // Constructs an error with the given cause and message.
-        explicit _error(fireplace::_error cause, std::wstring message);
+        explicit _error(_error* cause, std::wstring message);
 
         // Copy constructor.
-        _error(const fireplace::_error& other);
+        _error(const _error& other);
 
         // Move constructor.
-        _error(fireplace::_error&& other);
+        _error(_error&& other);
 
         // Deconstructs this error.
         ~_error();
 
         // Copy-swap idiom operator.
-        _error& operator=(fireplace::_error other);
+        _error& operator=(_error other);
     };
 
     /*

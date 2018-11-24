@@ -24,20 +24,20 @@
 
 // Constructs a new error.
 fireplace::_error::_error() :
-    cause(),
-    message(L"")
+    cause(nullptr),
+    message()
 {
 }
 
 // Constructs a new error with the given message.
 fireplace::_error::_error(std::wstring _message) :
-    cause(),
+    cause(nullptr),
     message(_message)
 {
 }
 
 // Constructs a new error with the given cause and message.
-fireplace::_error::_error(fireplace::_error _cause, std::wstring _message) :
+fireplace::_error::_error(_error* _cause, std::wstring _message) :
     cause(_cause),
     message(_message)
 {
@@ -45,15 +45,15 @@ fireplace::_error::_error(fireplace::_error _cause, std::wstring _message) :
 
 // Copy constructor.
 fireplace::_error::_error(const fireplace::_error& other) :
-    cause(fireplace::_error(other.cause)),  // Follows deep copy construction.
+    cause(other.cause),
     message(other.message)
 {
 }
 
 // Move constructor.
 fireplace::_error::_error(fireplace::_error&& other) :
-    cause(),
-    message(L"")
+    cause(nullptr),
+    message()
 {
     std::swap(cause, other.cause);
     std::swap(message, other.message);
