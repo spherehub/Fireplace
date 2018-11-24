@@ -46,7 +46,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 52
+#define FIREPLACE_PATCH 53
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
