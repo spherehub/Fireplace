@@ -80,16 +80,16 @@ namespace fireplace {
         _info(std::wstring message);
 
         // Copy constructor.
-        _info(const _info& other);
+        _info(const fireplace::_info& other);
 
         // Move constructor.
-        _info(_info&& other);
+        _info(fireplace::_info&& other);
 
         // Deconstructs this info log.
         ~_info();
 
         // Copy-swap idiom operator.
-        _info& operator=(_info other);
+        _info& operator=(fireplace::_info other);
     };
 
     /*
