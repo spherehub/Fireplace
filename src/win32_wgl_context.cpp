@@ -464,4 +464,26 @@ fireplace::_win32_wgl_context::~_win32_wgl_context() {
         _firelib.wgl.delete_context(hrc);
 }
 
+// Makes this context current.
+void fireplace::_win32_wgl_context::make_current() {
+    if (!_firelib.wgl.make_current(hdc, hrc)) {
+        _firelib.lib_errors.push(fireplace::_error(
+            fireplace::_error(_win32_library::last_error()),
+            L"Could not make context current."
+        ));
+        return;
+    }
+}
+
+// Swaps the buffers of the given window.
+void fireplace::_win32_wgl_context::swap_buffers() {
+    if (!::SwapBuffers(hdc)) {
+        _firelib.lib_errors.push(fireplace::_error(
+            fireplace::_error(_win32_library::last_error()),
+            L"Failed to swap frame buffers."
+        ));
+        return;
+    }
+}
+
 #endif
