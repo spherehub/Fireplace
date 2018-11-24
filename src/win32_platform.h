@@ -231,7 +231,9 @@ namespace fireplace {
 
     // Our definition of GL types.
     typedef unsigned char   GLubyte;
+    typedef unsigned char   GLuchar;
     typedef signed char     GLbyte;
+    typedef signed char     GLchar;
     typedef unsigned char   GLboolean;
     typedef unsigned short  GLushort;
     typedef short           GLshort;

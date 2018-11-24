@@ -46,7 +46,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 43
+#define FIREPLACE_PATCH 44
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
@@ -82,48 +82,48 @@
 #define opengl                      0x1000
 
 // OpenGL Attribute constants.
-#define context_profile             0x1001
-#define context_debug               0x1002
-#define context_forward_compatible  0x1003
-#define context_no_error            0x1004
-#define context_release_behaviour   0x1005
-#define context_robustness          0x1006
-#define context_major_version       0x1007
-#define context_minor_version       0x1008
-#define context_creation_api        0x1009
-#define context_client_api          0x100A
-#define stereoscopic                0x100B
-#define samples                     0x100C
-#define auxiliary_buffers           0x100D
-#define double_buffered             0x100E
-#define transparent                 0x100F
-#define accumulation_alpha_bits     0x1010
-#define accumulation_green_bits     0x1011
-#define accumulation_blue_bits      0x1013
-#define accumulation_red_bits       0x1014
-#define stencil_bits                0x1015
-#define depth_bits                  0x1016
-#define alpha_bits                  0x1017
-#define blue_bits                   0x1018
-#define green_bits                  0x1019
-#define red_bits                    0x101A
+constexpr unsigned int context_profile              = 0x1001;
+constexpr unsigned int context_debug                = 0x1002;
+constexpr unsigned int context_forward_compatible   = 0x1003;
+constexpr unsigned int context_no_error             = 0x1004;
+constexpr unsigned int context_release_behaviour    = 0x1005;
+constexpr unsigned int context_robustness           = 0x1006;
+constexpr unsigned int context_major_version        = 0x1007;
+constexpr unsigned int context_minor_version        = 0x1008;
+constexpr unsigned int context_creation_api         = 0x1009;
+constexpr unsigned int context_client_api           = 0x100A;
+constexpr unsigned int stereoscopic                 = 0x100B;
+constexpr unsigned int samples                      = 0x100C;
+constexpr unsigned int auxiliary_buffers            = 0x100D;
+constexpr unsigned int double_buffered              = 0x100E;
+constexpr unsigned int transparent                  = 0x100F;
+constexpr unsigned int accum_alpha_bits             = 0x1010;
+constexpr unsigned int accum_green_bits             = 0x1011;
+constexpr unsigned int accum_blue_bits              = 0x1013;
+constexpr unsigned int accum_red_bits               = 0x1014;
+constexpr unsigned int stencil_bits                 = 0x1015;
+constexpr unsigned int depth_bits                   = 0x1016;
+constexpr unsigned int alpha_bits                   = 0x1017;
+constexpr unsigned int blue_bits                    = 0x1018;
+constexpr unsigned int green_bits                   = 0x1019;
+constexpr unsigned int red_bits                     = 0x101A;
 
 // OpenGL Attribute values constants.
-#define no_api                      0x1100
-#define opengl_api                  0x1101
-#define opengl_es_api               0x1102
-#define any_profile                 0x1103
-#define core_profile                0x1104
-#define compatibility_profile       0x1105
-#define no_robustness               0x1106
-#define no_reset_notification       0x1107
-#define lose_context_on_reset       0x1108
-#define any_release_behaviour       0x1109
-#define release_behaviour_flush     0x110A
-#define release_behaviour_none      0x110B
-#define native_context_api          0x110C
-#define egl_context_api             0x110D // Future support for egl.
-#define osmesa_context_api          0x110E // Future support for osmesa.
+constexpr unsigned int no_api                       = 0x1100;
+constexpr unsigned int opengl_api                   = 0x1101;
+constexpr unsigned int opengl_es_api                = 0x1102;
+constexpr unsigned int any_profile                  = 0x1103;
+constexpr unsigned int core_profile                 = 0x1104;
+constexpr unsigned int compatibility_profile        = 0x1105;
+constexpr unsigned int no_robustness                = 0x1106;
+constexpr unsigned int no_reset_notification        = 0x1107;
+constexpr unsigned int lose_context_on_reset        = 0x1108;
+constexpr unsigned int any_release_behaviour        = 0x1109;
+constexpr unsigned int release_behaviour_flush      = 0x110A;
+constexpr unsigned int release_behaviour_none       = 0x110B;
+constexpr unsigned int native_context_api           = 0x110C;
+constexpr unsigned int egl_context_api              = 0x110D; // Future support for egl.
+constexpr unsigned int osmesa_context_api           = 0x110E; // Future support for osmesa.
 #endif
 
 namespace fireplace {
