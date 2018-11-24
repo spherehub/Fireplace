@@ -24,11 +24,6 @@
 #define ASHWND(handle) \
     ((HWND)handle)
 
-// Closes the given window.
-void fireplace::_win32_close(fireplace::handle _window) {
-    fireplace::_win32_destroy_window(_window);
-}
-
 // Creates a window with the given name.
 void fireplace::_win32_create_window(
     fireplace::handle _window,
@@ -53,7 +48,7 @@ void fireplace::_win32_create_window(
     // Check that window succeeded to create.
     if (!_window) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Could not close window."
         ));
         return;
@@ -65,9 +60,8 @@ void fireplace::_win32_create_window(
 // Destroys a given window.
 void fireplace::_win32_destroy_window(fireplace::handle _window) {
     // Confirm window exists.
-    if (!::IsWindow(ASHWND(_window)) {
+    if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not close window, window is invalid."
         ));
         return;
@@ -79,7 +73,7 @@ void fireplace::_win32_destroy_window(fireplace::handle _window) {
     // Attempt to destroy window.
     if (!::DestroyWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Could not close window."
         ));
         return;
@@ -91,7 +85,6 @@ void fireplace::_win32_disable(fireplace::handle _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not disable window, window is invalid."
         ));
         return;
@@ -105,7 +98,6 @@ void fireplace::_win32_enable(fireplace::handle _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not enable window, window is invalid."
         ));
         return;
@@ -119,7 +111,6 @@ void fireplace::_win32_focus(fireplace::handle _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not focus window, window is invalid."
         ));
         return;
@@ -137,7 +128,6 @@ void fireplace::_win32_get_position(
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not get window position, window is invalid."
         ));
         return;
@@ -146,7 +136,7 @@ void fireplace::_win32_get_position(
     RECT rect;
     if (!::GetWindowRect(ASHWND(_window), &rect)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Could not get window position."
         ));
     }
@@ -164,7 +154,6 @@ void fireplace::_win32_get_size(
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not get window size, window is invalid."
         ));
         return;
@@ -173,7 +162,7 @@ void fireplace::_win32_get_size(
     RECT rect;
     if (!::GetWindowRect(ASHWND(_window), &rect)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Could not get window size."
         ));
     }
@@ -187,7 +176,6 @@ void fireplace::_win32_hide(fireplace::handle _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not hide window, window is invalid."
         ));
         return;
@@ -201,7 +189,6 @@ bool fireplace::_win32_is_enabled(fireplace::handle _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Window is not enabled, window is invalid."
         ));
         return false;
@@ -215,7 +202,6 @@ bool fireplace::_win32_is_focused(fireplace::handle _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Window is not focused, window is invalid."
         ));
         return false;
@@ -229,7 +215,6 @@ bool fireplace::_win32_is_maximized(fireplace::handle _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Window is not maximized, window is invalid."
         ));
         return false;
@@ -245,7 +230,6 @@ bool fireplace::_win32_is_minimized(fireplace::handle _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Window is not minimized, window is invalid."
         ));
         return false;
@@ -266,7 +250,6 @@ void fireplace::_win32_maximize(fireplace::handle _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not maximize window, window is invalid."
         ));
         return;
@@ -279,7 +262,6 @@ void fireplace::_win32_minimize(fireplace::handle _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not minimize window, window is invalid."
         ));
         return;
@@ -293,7 +275,6 @@ void fireplace::_win32_poll_events(fireplace::handle _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Cannot poll events of invalid window."
         ));
         return;
@@ -302,7 +283,7 @@ void fireplace::_win32_poll_events(fireplace::handle _window) {
     // TODO: set up message filters.
 
     MSG msg;
-    while (::Peek(&msg, ASHWND(_window), 0, 0, PM_REMOVE) > 0) {
+    while (::PeekMessage(&msg, ASHWND(_window), 0, 0, PM_REMOVE) > 0) {
         ::TranslateMessage(&msg);
         ::DispatchMessage(&msg);
     }
@@ -317,7 +298,6 @@ void fireplace::_win32_position_at(
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not position window, window is invalid."
         ));
         return;
@@ -328,7 +308,7 @@ void fireplace::_win32_position_at(
         !::SetWindowPos(ASHWND(_window), NULL, pos_x, pos_y, 0, 0, SWP_NOSIZE)
     ) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Could not position window."
         ));
         return;
@@ -344,7 +324,6 @@ void fireplace::_win32_resize_to(
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not resize window, window is invalid."
         ));
         return;
@@ -355,7 +334,7 @@ void fireplace::_win32_resize_to(
         !::SetWindowPos(ASHWND(_window), NULL, 0, 0, width, height, SWP_NOMOVE)
     ) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Could not resize window."
         ));
         return;
@@ -370,7 +349,6 @@ void fireplace::_win32_set_title(
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not set window title, window is invalid."
         ));
         return;
@@ -379,7 +357,7 @@ void fireplace::_win32_set_title(
     // Attempt to set window title, catch whatever could go wrong.
     if (!::SetWindowText(ASHWND(_window), title)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Could not set window title."
         ));
         return;
@@ -391,7 +369,6 @@ void fireplace::_win32_show(fireplace::handle _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not show window, window is invalid."
         ));
         return;
@@ -405,20 +382,19 @@ std::wstring fireplace::_win32_title(fireplace::handle _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Could not get window title, window is invalid."
         ));
         return;
     }
 
-    int length      = ::GetWindowTitleLength(ASHWND(_window));
-    wchar_t* title  = (wchar_t*)::calloc(lenght, sizeof(wchar_t));
+    int length      = ::GetWindowTextLength(ASHWND(_window));
+    wchar_t* title  = (wchar_t*)::calloc(length, sizeof(wchar_t));
     int count       = ::GetWindowText(ASHWND(_window), title, length);
 
     // Something went wrong.
     if (count < length) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Could not get window title."
         ));
         return std::wstring(L"");

@@ -29,7 +29,14 @@ fireplace::_error::_error() :
 {
 }
 
-// Constructs a new error with the given cause, code, and message.
+// Constructs a new error with the given message.
+fireplace::_error::_error(std::wstring _message) :
+    cause(),
+    message(_message)
+{
+}
+
+// Constructs a new error with the given cause and message.
 fireplace::_error::_error(fireplace::_error _cause, std::wstring _message) :
     cause(_cause),
     message(_message)

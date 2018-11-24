@@ -49,7 +49,10 @@ namespace fireplace {
         // Constructs an empty error.
         explicit _error();
 
-        // Constructs an error with the given cause, code, and message.
+        // Constructs an error with the given message.
+        explicit _error(std::wstring message);
+
+        // Constructs an error with the given cause and message.
         explicit _error(fireplace::_error cause, std::wstring message);
 
         // Copy constructor.

@@ -34,10 +34,9 @@ fireplace::frame::frame(std::wstring title) :
     m_context(nullptr)
 {
 #ifdef _WIN32
-    _win32_create_window(m_handle, title.c_str());
+    _win32_create_window(m_handle, title.c_str(), this);
 
     if (m_handle) {
-        m_open = true;
         // create window context.
     }
 #endif
@@ -45,8 +44,8 @@ fireplace::frame::frame(std::wstring title) :
 
 // Copy constructor.
 fireplace::frame::frame(const frame& other) :
-    m_handle(std::copy(other.m_handle)),
-    m_context(std::copy(other.m_context))
+    m_handle(other.m_handle),
+    m_context(other.m_context)
 {
 }
 
@@ -154,7 +153,7 @@ bool fireplace::frame::is_minimized() const {
 // Returns whether or not this window is open.
 bool fireplace::frame::is_open() const {
 #ifdef _WIN32
-    return _win32_is_window_open(m_handle);
+    return _win32_is_open(m_handle);
 #endif
 }
 

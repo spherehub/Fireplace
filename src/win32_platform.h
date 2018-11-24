@@ -151,6 +151,9 @@ namespace fireplace {
     // Sets the title of the given window.
     void _win32_set_title(handle _window, const wchar_t* title);
 
+    // Shows the given window.
+    void _win32_show(handle _window);
+
     // Gets the title of the given window.
     std::wstring _win32_title(handle _window);
 
