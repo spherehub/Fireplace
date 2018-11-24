@@ -1,3 +1,9 @@
+# Personal exclusions
+.vs/
+bin/
+int/
+fireplace.vcxproj.user
+
 # Prerequisites
 *.d
 

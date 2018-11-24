@@ -25,7 +25,9 @@
 
 #if !defined(_WIN32) && (defined(__WIN32__) || defined(WIN32) || defined(__MINGW32__))
 #define _WIN32
+#endif // _WIN32
 
+#ifdef _WIN32
 // These defines are important to specific windows things.
 #ifndef APIENTRY
 #define APIENTRY __stdcall
@@ -44,7 +46,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 40
+#define FIREPLACE_PATCH 41
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
