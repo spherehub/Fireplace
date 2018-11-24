@@ -66,6 +66,10 @@
 #define FIREPLACE_WIN32MENUNAME L"FIREPLACE_MENU"
 #endif
 
+#define dll_open(name)                  ::LoadLibrary(name)
+#define dll_close(handle)               ::FreeLibrary(handle)
+#define get_dll_symbol(handle, name)    ::GetProcAddress(handle, name)
+
 namespace fireplace {
     // Callback for the window.
     LRESULT CALLBACK _window_procedure(HWND, UINT, WPARAM, LPARAM);
@@ -258,18 +262,18 @@ namespace fireplace {
     typedef PIXELFORMATDESCRIPTOR PFD;
 
     // Important function pointers.
-    typedef       HGLRC     (WINAPI *PFNWGLCREATECONTEXT)(HDC);
-    typedef       BOOL      (WINAPI *PFNWGLDELETECONTEXT)(HGLRC);
-    typedef       PROC      (WINAPI *PFNWGLGETPROCADDRESS)(LPCSTR);
-    typedef       HDC       (WINAPI *PFNWGLGETCURRENTDC)(void);
-    typedef       HGLRC     (WINAPI *PFNWGLGETCURRENTCONTEXT)(void);
-    typedef       BOOL      (WINAPI *PFNWGLMAKECURRENT)(HDC, HGLRC);
-    typedef       BOOL      (WINAPI *PFNWGLSHARELISTS)(HGLRC, HGLRC);
-    typedef       BOOL      (WINAPI *PFNWGLSWAPINTERVALEXT)(GLint);
-    typedef       HGLRC     (WINAPI *PFNWGLCREATECONTEXTATTRIBSARB)(HDC, HGLRC, const GLint*);
-    typedef const GLchar*   (WINAPI *PFNWGLGETEXTENSIONSSTRINGARB)(HDC);
-    typedef const GLchar*   (WINAPI *PFNWGLGETEXTENSIONSSTRINGEXT)(void);
-    typedef       HGLRC     (WINAPI *PFNWGLGETPIXELFORMATATTRIBIVARB)(HDC, GLint, GLint, GLuint, const GLint*, GLint*);
+    typedef       HGLRC (WINAPI *PFNWGLCREATECONTEXT)(HDC);
+    typedef       BOOL  (WINAPI *PFNWGLDELETECONTEXT)(HGLRC);
+    typedef       PROC  (WINAPI *PFNWGLGETPROCADDRESS)(LPCSTR);
+    typedef       HDC   (WINAPI *PFNWGLGETCURRENTDC)(void);
+    typedef       HGLRC (WINAPI *PFNWGLGETCURRENTCONTEXT)(void);
+    typedef       BOOL  (WINAPI *PFNWGLMAKECURRENT)(HDC, HGLRC);
+    typedef       BOOL  (WINAPI *PFNWGLSHARELISTS)(HGLRC, HGLRC);
+    typedef       BOOL  (WINAPI *PFNWGLSWAPINTERVALEXT)(GLint);
+    typedef       HGLRC (WINAPI *PFNWGLCREATECONTEXTATTRIBSARB)(HDC, HGLRC, const GLint*);
+    typedef const char* (WINAPI *PFNWGLGETEXTENSIONSSTRINGARB)(HDC);
+    typedef const char* (WINAPI *PFNWGLGETEXTENSIONSSTRINGEXT)(void);
+    typedef       HGLRC (WINAPI *PFNWGLGETPIXELFORMATATTRIBIVARB)(HDC, GLint, GLint, GLuint, const GLint*, GLint*);
 
     /*
      * This structure represents the OpenGL library for Windows, or in other
@@ -325,6 +329,12 @@ namespace fireplace {
 
         // Deconstructs this library.
         ~_win32_wgl_library();
+
+        // Checks for an extension in the given string.
+        bool extension_in_list(const char* extension, const char* list);
+
+        // Checks if an extension is supported.
+        bool extension_supported(const char* extension);
     };
 
     /*

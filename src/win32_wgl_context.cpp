@@ -23,52 +23,6 @@
 #define ASHWND(_handle) \
     ((HWND)_handle)
 
-// Checks for a given extension in a list of extensions.
-bool wgl_extension_in_list(const char* extension, const char* list) {
-    const char* start = list;
-
-    while (true) {
-        const char* string;
-        const char* terminator;
-
-        if (!(string = strstr(start, extension)))
-            return false;
-
-        terminator = string + strlen(extension);
-
-        if (string == start || *(string - 1) == ' ')
-            if (*terminator == ' ' || *terminator == '\0')
-                break;
-
-        start = terminator;
-    }
-
-    return true;
-}
-
-// Checks for supported extensions.
-bool wgl_extension_supported(const char* extension) {
-    const char* list;
-
-    if (wgl_get_extensions_string_ext) {
-        list = wgl_get_extensions_string_ext();
-
-        if (list)
-            if (wgl_extension_in_list(extension, list))
-                return true;
-    }
-
-    if (wgl_get_extensions_string_arb) {
-        list = wgl_get_extensions_string_arb(wgl_get_current_dc());
-
-        if (list)
-            if (wgl_extension_in_list(extension, list))
-                return true;
-    }
-
-    return false;
-}
-
 // Gets the specified attribute of the specified format.
 int get_pixel_format_attrib(HDC device, int format, int attrib) {
     int value = 0;

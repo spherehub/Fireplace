@@ -35,7 +35,7 @@ fireplace::_win32_wgl_library::_win32_wgl_library() {
     // Make sure class was registered.
     if (!::RegisterClassEx(&tempcls)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Failure to register temporary class for WGL."
         ));
         return;
@@ -59,7 +59,7 @@ fireplace::_win32_wgl_library::_win32_wgl_library() {
 
     if (!temp) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Failure to create temporary window for WGL."
         ));
         return;
@@ -94,7 +94,6 @@ fireplace::_win32_wgl_library::_win32_wgl_library() {
         !share_lists
     ) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Failed to load function pointers for wgl."
         ));
         return;
@@ -103,7 +102,7 @@ fireplace::_win32_wgl_library::_win32_wgl_library() {
     // Attempt to aquire DC.
     if (!(dc = ::GetDC(temp))) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Failed to get temp window device context."
         ));
         return;
@@ -130,7 +129,7 @@ fireplace::_win32_wgl_library::_win32_wgl_library() {
     // Attempt to set pixel format descriptor.
     if (!::SetPixelFormat(dc, format, &pfd)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(nullptr, _win32_library::last_error()),
+            fireplace::_error(_win32_library::last_error()),
             L"Failed to set pixel format for WGL initialization."
         ));
         return;
@@ -139,7 +138,6 @@ fireplace::_win32_wgl_library::_win32_wgl_library() {
     // Attempt to create wgl dummy context.
     if (!(rc = create_context(dc))) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Failed to create dummy context for WGL."
         ));
         return;
@@ -148,7 +146,6 @@ fireplace::_win32_wgl_library::_win32_wgl_library() {
     // Attempt to make that context current.
     if (!make_current(dc, rc)) {
         _firelib.lib_errors.push(fireplace::_error(
-            nullptr,
             L"Failed to create dummy context for WGL."
         ));
         return;
@@ -186,6 +183,55 @@ fireplace::_win32_wgl_library::_win32_wgl_library() {
 fireplace::_win32_wgl_library::~_win32_wgl_library() {
     if (gl_instance)
         dll_close(gl_instance);
+}
+
+// Checks for a given extension in a list of extensions.
+bool fireplace::_win32_wgl_library::extension_in_list(
+    const char* extension,
+    const char* list
+) {
+    const char* start = list;
+
+    while (true) {
+        const char* string;
+        const char* terminator;
+
+        if (!(string = strstr(start, extension)))
+            return false;
+
+        terminator = string + strlen(extension);
+
+        if (string == start || *(string - 1) == ' ')
+            if (*terminator == ' ' || *terminator == '\0')
+                break;
+
+        start = terminator;
+    }
+
+    return true;
+}
+
+// Checks for supported extensions.
+bool fireplace::_win32_wgl_library::extension_supported(const char* extension) {
+    const char* list;
+
+    if (get_extensions_string_ext) {
+        list = get_extensions_string_ext();
+
+        if (list)
+            if (extension_in_list(extension, list))
+                return true;
+    }
+
+    if (get_extensions_string_arb) {
+        list = get_extensions_string_arb(get_current_dc());
+
+        if (list)
+            if (extension_in_list(extension, list))
+                return true;
+    }
+
+    return false;
 }
 
 #endif
