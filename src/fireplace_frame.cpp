@@ -68,6 +68,8 @@ fireplace::frame::~frame() {
 // Copy-swap idiom operator.
 fireplace::frame& fireplace::frame::operator=(frame other) {
     this->swap(other);
+
+    return *this;
 }
 
 // Closes this window. This releases some memory so it is non-const.

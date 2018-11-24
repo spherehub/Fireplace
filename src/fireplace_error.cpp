@@ -68,4 +68,6 @@ fireplace::_error::~_error() {
 fireplace::_error& fireplace::_error::operator=(fireplace::_error other) {
     this->cause     = other.cause;
     this->message   = other.message;
+
+    return *this;
 }

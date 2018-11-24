@@ -146,6 +146,8 @@ fireplace::_win32_wgl_config& fireplace::_win32_wgl_config::operator=(
     std::swap(green_bits, other.green_bits);
     std::swap(red_bits, other.red_bits);
     std::swap(handle, other.handle);
+
+    return *this;
 }
 
 #endif

@@ -54,4 +54,6 @@ fireplace::_info::~_info() {
 // Copy-swap idiom operator.
 fireplace::_info& fireplace::_info::operator=(_info other) {
     this->message = other.message;
+
+    return *this;
 }

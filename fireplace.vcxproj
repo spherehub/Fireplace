@@ -226,6 +226,7 @@
     <ClCompile Include="src\win32_wgl_context.cpp" />
     <ClCompile Include="src\win32_wgl_library.cpp" />
     <ClCompile Include="src\win32_window.cpp" />
+    <ClCompile Include="tests\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\fireplace.h" />
