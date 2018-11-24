@@ -386,10 +386,10 @@ namespace fireplace {
         _win32_wgl_config& operator=(_win32_wgl_config other);
     };
 
-    //
+    // Gets the specified attribute of the specified format.
     int get_pixel_format_attrib(HDC device, int format, int attrib);
 
-    //
+    // Chooses a pixel format that best represents what the user wants.
     int choose_pixel_format(HDC device, _win32_wgl_config expected);
 
     /*
