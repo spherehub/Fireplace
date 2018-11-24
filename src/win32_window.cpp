@@ -404,4 +404,25 @@ std::wstring fireplace::_win32_title(fireplace::handle _window) {
 }
 
 #undef ASHWND
+
+// Callback for the window.
+LRESULT CALLBACK fireplace::_window_procedure(
+    HWND hwnd,
+    UINT uMsg,
+    WPARAM wParam,
+    LPARAM lParam
+) {
+    frame* frm = (frame*)::GetProp(hwnd, L"FIREPLACE_PROP");
+    LRESULT res = 0;
+
+    switch (uMsg) {
+    
+    default:
+        res = DefWindowProc(hwnd, uMsg, wParam, lParam);
+        break;
+    }
+
+    return res;
+}
+
 #endif

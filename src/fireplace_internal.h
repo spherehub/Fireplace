@@ -140,7 +140,7 @@ namespace fireplace {
      * The external instance of the fireplace library that is usable by the
      * compilation units.
      */
-    extern _fireplace_library _firelib;
+    static _fireplace_library _firelib;
 }
 
 #endif
