@@ -48,7 +48,7 @@ void fireplace::_win32_create_window(
     // Check that window succeeded to create.
     if (!_window) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Could not close window."
         ));
         return;
@@ -73,7 +73,7 @@ void fireplace::_win32_destroy_window(fireplace::handle _window) {
     // Attempt to destroy window.
     if (!::DestroyWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Could not close window."
         ));
         return;
@@ -136,7 +136,7 @@ void fireplace::_win32_get_position(
     RECT rect;
     if (!::GetWindowRect(ASHWND(_window), &rect)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Could not get window position."
         ));
     }
@@ -162,7 +162,7 @@ void fireplace::_win32_get_size(
     RECT rect;
     if (!::GetWindowRect(ASHWND(_window), &rect)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Could not get window size."
         ));
     }
@@ -308,7 +308,7 @@ void fireplace::_win32_position_at(
         !::SetWindowPos(ASHWND(_window), NULL, pos_x, pos_y, 0, 0, SWP_NOSIZE)
     ) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Could not position window."
         ));
         return;
@@ -334,7 +334,7 @@ void fireplace::_win32_resize_to(
         !::SetWindowPos(ASHWND(_window), NULL, 0, 0, width, height, SWP_NOMOVE)
     ) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Could not resize window."
         ));
         return;
@@ -357,7 +357,7 @@ void fireplace::_win32_set_title(
     // Attempt to set window title, catch whatever could go wrong.
     if (!::SetWindowText(ASHWND(_window), title)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Could not set window title."
         ));
         return;
@@ -384,7 +384,7 @@ std::wstring fireplace::_win32_title(fireplace::handle _window) {
         _firelib.lib_errors.push(fireplace::_error(
             L"Could not get window title, window is invalid."
         ));
-        return;
+        return std::wstring();
     }
 
     int length      = ::GetWindowTextLength(ASHWND(_window));
@@ -394,10 +394,10 @@ std::wstring fireplace::_win32_title(fireplace::handle _window) {
     // Something went wrong.
     if (count < length) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Could not get window title."
         ));
-        return std::wstring(L"");
+        return std::wstring();
     }
 
     return std::wstring(title, length);

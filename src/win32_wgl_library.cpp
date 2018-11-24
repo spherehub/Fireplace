@@ -35,7 +35,7 @@ fireplace::_win32_wgl_library::_win32_wgl_library() {
     // Make sure class was registered.
     if (!::RegisterClassEx(&tempcls)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Failure to register temporary class for WGL."
         ));
         return;
@@ -59,7 +59,7 @@ fireplace::_win32_wgl_library::_win32_wgl_library() {
 
     if (!temp) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Failure to create temporary window for WGL."
         ));
         return;
@@ -102,7 +102,7 @@ fireplace::_win32_wgl_library::_win32_wgl_library() {
     // Attempt to aquire DC.
     if (!(dc = ::GetDC(temp))) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Failed to get temp window device context."
         ));
         return;
@@ -129,7 +129,7 @@ fireplace::_win32_wgl_library::_win32_wgl_library() {
     // Attempt to set pixel format descriptor.
     if (!::SetPixelFormat(dc, format, &pfd)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Failed to set pixel format for WGL initialization."
         ));
         return;

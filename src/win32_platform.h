@@ -21,6 +21,12 @@
 // SOFTWARE.
 #ifndef FIREPLACE_WIN32_PLATFORM_HEADER
 #define FIREPLACE_WIN32_PLATFORM_HEADER
+
+// Undefine these, because we don't need them once they are defined by windows.
+#undef APIENTRY
+#undef CALLBACK
+#undef WINGDIAPI
+
 #define UNICODE             // We use unicode so this is important.
 #define NOMINMAX            // Fixes an issue with C++ std::min and std::max
 #define STRICT              // Makes sure that types are strict.

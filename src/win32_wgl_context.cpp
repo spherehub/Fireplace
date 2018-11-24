@@ -291,7 +291,7 @@ int fireplace::choose_pixel_format(
 fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
     if (!(hdc = ::GetDC(ASHWND(_window)))) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Failed to get window device context."
         ));
         return;
@@ -313,7 +313,7 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
     // Attempt to describe pixel format.
     if (!::DescribePixelFormat(hdc, format, sizeof(PFD), &description)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Failed to describe pixel format."
         ));
         return;
@@ -322,7 +322,7 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
     // Attempt to set pixel format.
     if (!::SetPixelFormat(hdc, format, &description)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Failed to set pixel format."
         ));
         return;
@@ -449,7 +449,7 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
     // Check that we got out rendering context.
     if (!hrc) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(fireplace::_win32_library::last_error()),
+            new fireplace::_error(fireplace::_win32_library::last_error()),
             L"Failed to create rendering context."
         ));
         return;
@@ -468,7 +468,7 @@ fireplace::_win32_wgl_context::~_win32_wgl_context() {
 void fireplace::_win32_wgl_context::make_current() {
     if (!_firelib.wgl.make_current(hdc, hrc)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Could not make context current."
         ));
         return;
@@ -479,7 +479,7 @@ void fireplace::_win32_wgl_context::make_current() {
 void fireplace::_win32_wgl_context::swap_buffers() {
     if (!::SwapBuffers(hdc)) {
         _firelib.lib_errors.push(fireplace::_error(
-            fireplace::_error(_win32_library::last_error()),
+            new fireplace::_error(_win32_library::last_error()),
             L"Failed to swap frame buffers."
         ));
         return;
