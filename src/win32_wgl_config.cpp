@@ -28,32 +28,32 @@
 fireplace::_win32_wgl_config::_win32_wgl_config(
     const _win32_wgl_config& other
 ) :
-    profile(std::copy(other.profile)),
-    debug(std::copy(other.debug)),
-    forward_compat(std::copy(other.forward_compat)),
-    no_error(std::copy(other.no_error)),
-    release_behaviour(std::copy(other.release_behaviour)),
-    robustness(std::copy(other.robustness)),
-    major_version(std::copy(other.major_version)),
-    minor_version(std::copy(other.minor_version)),
-    creation_api(std::copy(other.creation_api)),
-    client_api(std::copy(other.client_api)),
-    stereoscopic(std::copy(other.stereoscopic)),
-    samples(std::copy(other.samples)),
-    auxiliary_buffers(std::copy(other.auxiliary_buffers)),
-    double_buffered(std::copy(other.double_buffered)),
-    transparent(std::copy(other.transparent)),
-    accum_alpha_bits(std::copy(other.accum_alpha_bits)),
-    accum_blue_bits(std::copy(other.accum_blue_bits)),
-    accum_green_bits(std::copy(other.accum_green_bits)),
-    accum_red_bits(std::copy(other.accum_red_bits)),
-    stencil_bits(std::copy(other.stencil_bits)),
-    depth_bits(std::copy(other.depth_bits)),
-    alpha_bits(std::copy(other.alpha_bits)),
-    blue_bits(std::copy(other.blue_bits)),
-    green_bits(std::copy(other.green_bits)),
-    red_bits(std::copy(other.red_bits)),
-    handle(std::copy(other.handle))
+    profile(other.profile),
+    debug(other.debug),
+    forward_compat(other.forward_compat),
+    no_error(other.no_error),
+    release_behaviour(other.release_behaviour),
+    robustness(other.robustness),
+    major_version(other.major_version),
+    minor_version(other.minor_version),
+    creation_api(other.creation_api),
+    client_api(other.client_api),
+    stereoscopic(other.stereoscopic),
+    samples(other.samples),
+    auxiliary_buffers(other.auxiliary_buffers),
+    double_buffered(other.double_buffered),
+    transparent(other.transparent),
+    accum_alpha_bits(other.accum_alpha_bits),
+    accum_blue_bits(other.accum_blue_bits),
+    accum_green_bits(other.accum_green_bits),
+    accum_red_bits(other.accum_red_bits),
+    stencil_bits(other.stencil_bits),
+    depth_bits(other.depth_bits),
+    alpha_bits(other.alpha_bits),
+    blue_bits(other.blue_bits),
+    green_bits(other.green_bits),
+    red_bits(other.red_bits),
+    handle(other.handle)
 {
 }
 
@@ -117,7 +117,7 @@ fireplace::_win32_wgl_config::_win32_wgl_config(
 }
 
 // Copy-swap idiom assignment operator.
-fireplace::_win32_wgl_config& fireplace::_win32_wgl_config::operator(
+fireplace::_win32_wgl_config& fireplace::_win32_wgl_config::operator=(
     _win32_wgl_config other
 ) {
     std::swap(profile, other.profile);
