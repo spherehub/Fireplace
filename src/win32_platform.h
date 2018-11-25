@@ -167,6 +167,8 @@ namespace fireplace {
     // Gets the title of the given window.
     std::wstring _win32_title(handle& _window);
 
+    /* TODO: Windows specific monitor code. */
+
     // WGL specific structures and code.
 #ifdef _FIREPLACE_OPENGL
     // Mostly important WGL macros.
@@ -440,18 +442,6 @@ namespace fireplace {
     };
 
 #elif defined(_FIREPLACE_DIRECTX)
-    #include <dxgi.h>
-
-    /**/
-    struct _win32_dx_library {
-    };
-
-    struct _win32_dx_config {
-    };
-
-    /**/
-    struct _win32_dx_context {
-    };
 
 #endif
 }
