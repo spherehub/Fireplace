@@ -343,7 +343,7 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle& _window) {
         return;
     }
 
-    int format = choose_pixel_format(hdc, config);
+    int format = choose_pixel_format(hdc, _firelib.config);
 
     // Confirm format
     if (!format) {
@@ -382,8 +382,8 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle& _window) {
         attribs[index++] = attrib;      \
         attribs[index++] = value;
 
-    if (config.client_api == opengl_api) {
-        if (config.forward_compat) {
+    if (_firelib.config.client_api == opengl_api) {
+        if (_firelib.config.forward_compat) {
             if (!_firelib.wgl.ARB_create_context) {
                 _firelib.lib_errors.push(fireplace::_error(
                     L"A forward compatible context is unavailable."
@@ -392,7 +392,7 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle& _window) {
             }
         }
 
-        if (config.profile) {
+        if (_firelib.config.profile) {
             if (!_firelib.wgl.ARB_create_context_profile) {
                 _firelib.lib_errors.push(fireplace::_error(
                     L"OpenGL profile requested but is unavailable."
@@ -418,28 +418,28 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle& _window) {
         int mask    = 0;
         int flags   = 0;
 
-        if (config.client_api == opengl_api) {
-            if (config.forward_compat)
+        if (_firelib.config.client_api == opengl_api) {
+            if (_firelib.config.forward_compat)
                 flags |= WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB;
-            if (config.profile == core_profile)
+            if (_firelib.config.profile == core_profile)
                 mask |= WGL_CONTEXT_CORE_PROFILE_BIT_ARB;
-            else if (config.profile == compatibility_profile)
+            else if (_firelib.config.profile == compatibility_profile)
                 mask |= WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB;
         } else {
             mask |= WGL_CONTEXT_ES2_PROFILE_BIT_EXT;
         }
 
-        if (config.debug)
+        if (_firelib.config.debug)
             flags |= WGL_CONTEXT_DEBUG_BIT_ARB;
 
-        if (config.robustness) {
+        if (_firelib.config.robustness) {
             if (_firelib.wgl.ARB_create_context_robustness) {
-                if (config.robustness == no_reset_notification) {
+                if (_firelib.config.robustness == no_reset_notification) {
                     set_attrib(
                         WGL_CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB,
                         WGL_NO_RESET_NOTIFICATION_ARB
                     );
-                } else if (config.robustness == lose_context_on_reset) {
+                } else if (_firelib.config.robustness == lose_context_on_reset) {
                     set_attrib(
                         WGL_CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB,
                         WGL_LOSE_CONTEXT_ON_RESET_ARB
@@ -450,14 +450,14 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle& _window) {
             }
         }
 
-        if (config.release_behaviour) {
+        if (_firelib.config.release_behaviour) {
             if (_firelib.wgl.ARB_context_flush_control) {
-                if (config.release_behaviour == release_behaviour_none) {
+                if (_firelib.config.release_behaviour == release_behaviour_none) {
                     set_attrib(
                         WGL_CONTEXT_RELEASE_BEHAVIOUR_ARB,
                         WGL_CONTEXT_RELEASE_BEHAVIOUR_NONE_ARB
                     );
-                } else if (config.release_behaviour == release_behaviour_flush) {
+                } else if (_firelib.config.release_behaviour == release_behaviour_flush) {
                     set_attrib(
                         WGL_CONTEXT_RELEASE_BEHAVIOUR_ARB,
                         WGL_CONTEXT_RELEASE_BEHAVIOUR_FLUSH_ARB
@@ -466,15 +466,15 @@ fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle& _window) {
             }
         }
 
-        if (config.no_error) {
+        if (_firelib.config.no_error) {
             if (_firelib.wgl.ARB_create_context_no_error) {
                 set_attrib(WGL_CONTEXT_OPENGL_NO_ERROR_ARB, true);
             }
         }
 
-        if (config.major_version != 1 || config.minor_version != 0) {
-            set_attrib(WGL_CONTEXT_MAJOR_VERSION_ARB, config.major_version);
-            set_attrib(WGL_CONTEXT_MINOR_VERSION_ARB, config.minor_version);
+        if (_firelib.config.major_version != 1 || _firelib.config.minor_version != 0) {
+            set_attrib(WGL_CONTEXT_MAJOR_VERSION_ARB, _firelib.config.major_version);
+            set_attrib(WGL_CONTEXT_MINOR_VERSION_ARB, _firelib.config.minor_version);
         }
 
         if (flags) {

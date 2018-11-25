@@ -46,7 +46,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 1
-#define FIREPLACE_PATCH 1
+#define FIREPLACE_PATCH 2
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
@@ -245,6 +245,9 @@ namespace fireplace {
 
     // Gets a user pointer by it's mapped name.
     handle get_user_pointer(std::string pointer_name);
+
+    // Sets the attribute of a given requested frame buffer.
+    void set_attribute(const unsigned int attrib, const int value);
 
     // Sets a user pointer.
     void set_user_pointer(std::string pointer_name, handle _handle);

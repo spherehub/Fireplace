@@ -117,6 +117,11 @@ namespace fireplace {
         // The window necessary wgl library.
         _win32_wgl_library wgl;
 
+        /*
+         * The configuration for contexts. Shares similar traits to the PFD.
+         * Although this is preferred over the PFD.
+         */
+        _win32_wgl_config config;
     #endif // _FIREPLACE_OPENGL
     #endif // _WIN32
 

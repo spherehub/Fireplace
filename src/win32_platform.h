@@ -349,36 +349,36 @@ namespace fireplace {
      * context. Values are set by default to their defaults.
      */
     struct _win32_wgl_config final {
-        unsigned int profile            =  any_profile;
-        unsigned int debug              =  false;
-        unsigned int forward_compat     =  false;
-        unsigned int no_error           =  false;
-        unsigned int release_behaviour  =  any_release_behaviour;
-        unsigned int robustness         =  no_robustness;
-        unsigned int major_version      =  1;
-        unsigned int minor_version      =  1;
-        unsigned int creation_api       =  native_context_api;
-        unsigned int client_api         =  opengl_api;
-        unsigned int stereoscopic       =  false;
-        unsigned int samples            =  0;
-        unsigned int auxiliary_buffers  =  0;
-        unsigned int double_buffered    =  1;
-        unsigned int transparent        =  false;
-        unsigned int accum_alpha_bits   =  0;
-        unsigned int accum_green_bits   =  0;
-        unsigned int accum_blue_bits    =  0;
-        unsigned int accum_red_bits     =  0;
-        unsigned int stencil_bits       =  8;
-        unsigned int depth_bits         = 24;
-        unsigned int alpha_bits         =  8;
-        unsigned int alpha_shift        =  0;
-        unsigned int blue_bits          =  8;
-        unsigned int blue_shift         =  0;
-        unsigned int green_bits         =  8;
-        unsigned int green_shift        =  0;
-        unsigned int red_bits           =  8;
-        unsigned int red_shift          =  0;
-        unsigned int handle             =  0;
+        int profile             =  any_profile;
+        int debug               =  false;
+        int forward_compat      =  false;
+        int no_error            =  false;
+        int release_behaviour   =  any_release_behaviour;
+        int robustness          =  no_robustness;
+        int major_version       =  1;
+        int minor_version       =  1;
+        int creation_api        =  native_context_api;
+        int client_api          =  opengl_api;
+        int stereoscopic        =  false;
+        int samples             =  0;
+        int auxiliary_buffers   =  0;
+        int double_buffered     =  1;
+        int transparent         =  false;
+        int accum_alpha_bits    =  0;
+        int accum_green_bits    =  0;
+        int accum_blue_bits     =  0;
+        int accum_red_bits      =  0;
+        int stencil_bits        =  8;
+        int depth_bits          = 24;
+        int alpha_bits          =  8;
+        int alpha_shift         =  0;
+        int blue_bits           =  8;
+        int blue_shift          =  0;
+        int green_bits          =  8;
+        int green_shift         =  0;
+        int red_bits            =  8;
+        int red_shift           =  0;
+        int handle              =  0;
 
         // Constructs a new win32 wgl configuration.
         explicit _win32_wgl_config() = default;
@@ -419,12 +419,6 @@ namespace fireplace {
          * rendering context that Window's allows us to use for legacy reasons.
          */
         HGLRC hrc;
-
-        /*
-         * The configuration for this context. Shares similar traits to the PFD.
-         * Although this is preferred over the PFD.
-         */
-        _win32_wgl_config config;
 
         // Constructs a new _win32_wgl_context.
         explicit _win32_wgl_context(handle& _window);
