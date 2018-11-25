@@ -288,7 +288,7 @@ int fireplace::choose_pixel_format(
 }
 
 // Constructs a new win32 wgl context.
-fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle _window) {
+fireplace::_win32_wgl_context::_win32_wgl_context(fireplace::handle& _window) {
     if (!(hdc = ::GetDC(ASHWND(_window)))) {
         _firelib.lib_errors.push(fireplace::_error(
             new fireplace::_error(_win32_library::last_error()),

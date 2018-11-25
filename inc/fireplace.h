@@ -45,8 +45,8 @@
 
 // Versioning.
 #define FIREPLACE_MAJOR 0
-#define FIREPLACE_MINOR 0
-#define FIREPLACE_PATCH 60
+#define FIREPLACE_MINOR 1
+#define FIREPLACE_PATCH 0
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
@@ -112,13 +112,13 @@ constexpr unsigned int red_bits                     = 0x101A;
 constexpr unsigned int no_api                       = 0x1100;
 constexpr unsigned int opengl_api                   = 0x1101;
 constexpr unsigned int opengl_es_api                = 0x1102;
-constexpr unsigned int any_profile                  = 0x1103;
+constexpr unsigned int any_profile                  = 0x0000;
 constexpr unsigned int core_profile                 = 0x1104;
 constexpr unsigned int compatibility_profile        = 0x1105;
 constexpr unsigned int no_robustness                = 0x1106;
 constexpr unsigned int no_reset_notification        = 0x1107;
 constexpr unsigned int lose_context_on_reset        = 0x1108;
-constexpr unsigned int any_release_behaviour        = 0x1109;
+constexpr unsigned int any_release_behaviour        = 0x0000;
 constexpr unsigned int release_behaviour_flush      = 0x110A;
 constexpr unsigned int release_behaviour_none       = 0x110B;
 constexpr unsigned int native_context_api           = 0x110C;
@@ -167,52 +167,52 @@ namespace fireplace {
         void close();
 
         // Disables this window.
-        void disable() const;
+        void disable();
 
         // Enables this window.
-        void enable() const;
+        void enable();
 
         // Focuses this window.
-        void focus() const;
+        void focus();
 
         // Gets the position of this window.
-        void get_position(int& pos_x, int& pos_y) const;
+        void get_position(int& pos_x, int& pos_y);
 
         // Gets the size of this window.
-        void get_size(int& width, int& height) const;
+        void get_size(int& width, int& height);
 
         // Returns the handle to this window.
-        const void* handle() const;
+        const void* handle();
 
         // Hides this window.
-        void hide() const;
+        void hide();
 
         // Checks if this window is enabled.
-        bool is_enabled() const;
+        bool is_enabled();
 
         // Checks if this window is focused.
-        bool is_focused() const;
+        bool is_focused();
 
         // Checks if this window is maximized.
-        bool is_maximized() const;
+        bool is_maximized();
 
         // Checks if this window is minimized.
-        bool is_minimized() const;
+        bool is_minimized();
 
         // Returns whether or not this window is open.
-        bool is_open() const;
+        bool is_open();
 
         // Makes this window the current window to be rendered to.
-        void make_current() const;
+        void make_current();
 
         // Maximizes this window.
-        void maximize() const;
+        void maximize();
 
         // Minimizes this window.
-        void minimize() const;
+        void minimize();
 
         // Polls the events of this window.
-        void poll_events() const;
+        void poll_events();
 
         // Repositions this window.
         void position_at(int pos_x, int pos_y);
@@ -224,13 +224,13 @@ namespace fireplace {
         void set_title(std::wstring title);
 
         // Shows this window.
-        void show() const;
+        void show();
 
         // Swaps this window's frame buffers.
-        void swap_buffers() const;
+        void swap_buffers();
 
         // Gets the title of this window.
-        std::wstring title() const;
+        std::wstring title();
     };
 
     // Prints all errors to the console.

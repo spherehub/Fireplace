@@ -26,7 +26,7 @@
 
 // Creates a window with the given name.
 void fireplace::_win32_create_window(
-    fireplace::handle _window,
+    fireplace::handle& _window,
     const wchar_t* title,
     fireplace::frame* _frame
 ) {
@@ -58,7 +58,7 @@ void fireplace::_win32_create_window(
 }
 
 // Destroys a given window.
-void fireplace::_win32_destroy_window(fireplace::handle _window) {
+void fireplace::_win32_destroy_window(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
@@ -81,7 +81,7 @@ void fireplace::_win32_destroy_window(fireplace::handle _window) {
 }
 
 // Disables the given window.
-void fireplace::_win32_disable(fireplace::handle _window) {
+void fireplace::_win32_disable(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
@@ -94,7 +94,7 @@ void fireplace::_win32_disable(fireplace::handle _window) {
 }
 
 // Enables the given window.
-void fireplace::_win32_enable(fireplace::handle _window) {
+void fireplace::_win32_enable(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
@@ -107,7 +107,7 @@ void fireplace::_win32_enable(fireplace::handle _window) {
 }
 
 // Focuses the given window.
-void fireplace::_win32_focus(fireplace::handle _window) {
+void fireplace::_win32_focus(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
@@ -121,7 +121,7 @@ void fireplace::_win32_focus(fireplace::handle _window) {
 
 // Gets the position of the given window.
 void fireplace::_win32_get_position(
-    fireplace::handle _window,
+    fireplace::handle& _window,
     int& pos_x,
     int& pos_y
 ) {
@@ -147,7 +147,7 @@ void fireplace::_win32_get_position(
 
 // Gets the size of the given window.
 void fireplace::_win32_get_size(
-    fireplace::handle _window,
+    fireplace::handle& _window,
     int& width,
     int& height
 ) {
@@ -172,7 +172,7 @@ void fireplace::_win32_get_size(
 }
 
 // Hides the given window.
-void fireplace::_win32_hide(fireplace::handle _window) {
+void fireplace::_win32_hide(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
@@ -185,7 +185,7 @@ void fireplace::_win32_hide(fireplace::handle _window) {
 }
 
 // Checks if the given window is enabled.
-bool fireplace::_win32_is_enabled(fireplace::handle _window) {
+bool fireplace::_win32_is_enabled(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
@@ -198,7 +198,7 @@ bool fireplace::_win32_is_enabled(fireplace::handle _window) {
 }
 
 // Checks if the given window is focused.
-bool fireplace::_win32_is_focused(fireplace::handle _window) {
+bool fireplace::_win32_is_focused(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
@@ -211,7 +211,7 @@ bool fireplace::_win32_is_focused(fireplace::handle _window) {
 }
 
 // Checks if the given window is maximized.
-bool fireplace::_win32_is_maximized(fireplace::handle _window) {
+bool fireplace::_win32_is_maximized(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
@@ -226,7 +226,7 @@ bool fireplace::_win32_is_maximized(fireplace::handle _window) {
 }
 
 // Checks if the given window is maximized.
-bool fireplace::_win32_is_minimized(fireplace::handle _window) {
+bool fireplace::_win32_is_minimized(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
@@ -241,12 +241,12 @@ bool fireplace::_win32_is_minimized(fireplace::handle _window) {
 }
 
 // Checks if the given window is open.
-bool fireplace::_win32_is_open(fireplace::handle _window) {
+bool fireplace::_win32_is_open(fireplace::handle& _window) {
     return ::IsWindow(ASHWND(_window));
 }
 
 // Maximizes the given window.
-void fireplace::_win32_maximize(fireplace::handle _window) {
+void fireplace::_win32_maximize(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
@@ -258,7 +258,7 @@ void fireplace::_win32_maximize(fireplace::handle _window) {
     ::ShowWindow(ASHWND(_window), SW_MAXIMIZE);
 }
 
-void fireplace::_win32_minimize(fireplace::handle _window) {
+void fireplace::_win32_minimize(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
@@ -271,7 +271,7 @@ void fireplace::_win32_minimize(fireplace::handle _window) {
 }
 
 // Polls the events for the given window.
-void fireplace::_win32_poll_events(fireplace::handle _window) {
+void fireplace::_win32_poll_events(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
@@ -291,7 +291,7 @@ void fireplace::_win32_poll_events(fireplace::handle _window) {
 
 // Positions the given window at the given coordinates.
 void fireplace::_win32_position_at(
-    fireplace::handle _window,
+    fireplace::handle& _window,
     int pos_x,
     int pos_y
 ) {
@@ -317,7 +317,7 @@ void fireplace::_win32_position_at(
 
 // Resizes the given window.
 void fireplace::_win32_resize_to(
-    fireplace::handle _window,
+    fireplace::handle& _window,
     int width,
     int height
 ) {
@@ -343,7 +343,7 @@ void fireplace::_win32_resize_to(
 
 // Sets the title of the given window.
 void fireplace::_win32_set_title(
-    fireplace::handle _window,
+    fireplace::handle& _window,
     const wchar_t* title
 ) {
     // Confirm window exists.
@@ -365,7 +365,7 @@ void fireplace::_win32_set_title(
 }
 
 // Shows the given window.
-void fireplace::_win32_show(fireplace::handle _window) {
+void fireplace::_win32_show(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(
@@ -378,7 +378,7 @@ void fireplace::_win32_show(fireplace::handle _window) {
 }
 
 // Gets the title of the given window.
-std::wstring fireplace::_win32_title(fireplace::handle _window) {
+std::wstring fireplace::_win32_title(fireplace::handle& _window) {
     // Confirm window exists.
     if (!::IsWindow(ASHWND(_window))) {
         _firelib.lib_errors.push(fireplace::_error(

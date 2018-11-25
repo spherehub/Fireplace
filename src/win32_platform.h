@@ -105,67 +105,67 @@ namespace fireplace {
     };
 
     // Creates a window with a name.
-    void _win32_create_window(handle _window, const wchar_t* title, frame* _frame);
+    void _win32_create_window(handle& _window, const wchar_t* title, frame* _frame);
 
     // Destroys a given window.
-    void _win32_destroy_window(handle _window);
+    void _win32_destroy_window(handle& _window);
 
     // Disables a given window.
-    void _win32_disable(handle _window);
+    void _win32_disable(handle& _window);
 
     // Enables a given window.
-    void _win32_enable(handle _window);
+    void _win32_enable(handle& _window);
 
     // Focuses a given window.
-    void _win32_focus(handle _window);
+    void _win32_focus(handle& _window);
 
     // Gets the position of a given window.
-    void _win32_get_position(handle _window, int& pos_x, int& pos_y);
+    void _win32_get_position(handle& _window, int& pos_x, int& pos_y);
 
     // Gets the size of a given window.
-    void _win32_get_size(handle _window, int& width, int& height);
+    void _win32_get_size(handle& _window, int& width, int& height);
 
     // Hides the given window.
-    void _win32_hide(handle _window);
+    void _win32_hide(handle& _window);
 
     // Checks if the given window is enabled.
-    bool _win32_is_enabled(handle _window);
+    bool _win32_is_enabled(handle& _window);
 
     // Checks if the given window is focused.
-    bool _win32_is_focused(handle _window);
+    bool _win32_is_focused(handle& _window);
 
     // Checks if the given window is maximized.
-    bool _win32_is_maximized(handle _window);
+    bool _win32_is_maximized(handle& _window);
 
     // Checks if the given window is minimized.
-    bool _win32_is_minimized(handle _window);
+    bool _win32_is_minimized(handle& _window);
 
     // Checks if the given window is open still.
-    bool _win32_is_open(handle _window);
+    bool _win32_is_open(handle& _window);
 
     // Maximizes the given window.
-    void _win32_maximize(handle _window);
+    void _win32_maximize(handle& _window);
 
     // Minimizes the given window.
-    void _win32_minimize(handle _window);
+    void _win32_minimize(handle& _window);
 
     // Polls the events of the given window.
-    void _win32_poll_events(handle _window);
+    void _win32_poll_events(handle& _window);
 
     // Positions the given window at the given coordinates.
-    void _win32_position_at(handle _window, int pos_x, int pos_y);
+    void _win32_position_at(handle& _window, int pos_x, int pos_y);
 
     // Resizes the given window to the given size.
-    void _win32_resize_to(handle _window, int width, int height);
+    void _win32_resize_to(handle& _window, int width, int height);
 
     // Sets the title of the given window.
-    void _win32_set_title(handle _window, const wchar_t* title);
+    void _win32_set_title(handle& _window, const wchar_t* title);
 
     // Shows the given window.
-    void _win32_show(handle _window);
+    void _win32_show(handle& _window);
 
     // Gets the title of the given window.
-    std::wstring _win32_title(handle _window);
+    std::wstring _win32_title(handle& _window);
 
     // WGL specific structures and code.
 #ifdef _FIREPLACE_OPENGL
@@ -423,7 +423,7 @@ namespace fireplace {
         _win32_wgl_config config;
 
         // Constructs a new _win32_wgl_context.
-        explicit _win32_wgl_context(handle _window);
+        explicit _win32_wgl_context(handle& _window);
 
         // Disallow copy construction, this is temporary.
         _win32_wgl_context(const _win32_wgl_context& other) = delete;
