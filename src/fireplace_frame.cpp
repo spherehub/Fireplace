@@ -36,6 +36,9 @@ fireplace::frame::frame(std::wstring title) {
     if (m_handle) {
     #ifdef _FIREPLACE_OPENGL
         m_context = new _win32_wgl_context(m_handle);
+
+    #elif defined(_FIREPLACE_DIRECTX)
+        
     #endif
     }
 #endif

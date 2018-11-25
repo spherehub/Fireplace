@@ -105,7 +105,7 @@
 #elif defined(_FIREPLACE_INCLUDE_GLCOREARB)
 #include <GL/glcorearb.h>
 #endif // _FIREPLACE_INCLUDE_ES
-#define opengl                      0x1000
+#define opengl 0x1000
 
 // OpenGL Attribute constants.
 constexpr unsigned int context_profile              = 0x1001;
@@ -271,6 +271,20 @@ namespace fireplace {
         // Gets the title of this window.
         std::wstring title();
     };
+
+    /* TODO: monitor and video_mode should go here */
+    // struct video_mode {};
+    // class monitor {};
+
+    /* TODO: input, keyboard, mouse, gamepad, and joystick should go here. */
+    /*
+    namespace input {
+        enum class key {};
+        enum class button {};
+
+        // Functions go here.
+    }
+     */
 
     // Prints all errors to the console.
     void dump_errors();

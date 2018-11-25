@@ -109,6 +109,10 @@ namespace fireplace {
         // A map of user pointers to names.
         std::unordered_map<std::string, handle> user_pointers;
 
+        // TODO: std::vector<monitor> connected_monitors;
+        // TODO: key lib_keys[static_cast<int>(key::last)];
+        // TODO: button lib_buttons[static_cast<int>(button::last)];
+        
     #ifdef _WIN32
         // The windows necessary library.
         _win32_library win32;
