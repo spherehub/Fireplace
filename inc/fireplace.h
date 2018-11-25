@@ -46,7 +46,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 1
-#define FIREPLACE_PATCH 2
+#define FIREPLACE_PATCH 3
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
@@ -66,17 +66,17 @@
 #ifdef _FIREPLACE_INCLUDE_GLEXT
 #include <GLES2/gl2ext.h>
 #endif // _FIREPLACE_INCLUDE_GLEXT
-#elif _FIREPLACE_INCLUDE_ES31
+#elif defined(_FIREPLACE_INCLUDE_ES31)
 #include <GLES3/gl31.h>
 #ifdef _FIREPLACE_INCLUDE_GLEXT
 #include <GLES2/gl2ext.h>
 #endif // _FIREPLACE_INCLUDE_GLEXT
-#elif _FIREPLACE_INCLUDE_ES32
+#elif defined(_FIREPLACE_INCLUDE_ES32)
 #include <GLES3/gl32.h>
 #ifdef _FIREPLACE_INCLUDE_GLEXT
 #include <GLES2/gl2ext.h>
 #endif // _FIREPLACE_INCLUDE_GLEXT
-#elif _FIREPLACE_INCLUDE_GLCOREARB
+#elif defined(_FIREPLACE_INCLUDE_GLCOREARB)
 #include <GL/glcorearb.h>
 #endif // _FIREPLACE_INCLUDE_ES
 #define opengl                      0x1000
@@ -113,6 +113,7 @@ constexpr unsigned int red_bits                     = 0x101D;
 constexpr unsigned int red_shift                    = 0x101E;
 
 // OpenGL Attribute values constants.
+constexpr int          ignore                       = -1;
 constexpr unsigned int no_api                       = 0x1100;
 constexpr unsigned int opengl_api                   = 0x1101;
 constexpr unsigned int opengl_es_api                = 0x1102;
