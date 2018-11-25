@@ -46,7 +46,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 1
-#define FIREPLACE_PATCH 0
+#define FIREPLACE_PATCH 1
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
@@ -104,9 +104,13 @@ constexpr unsigned int accum_red_bits               = 0x1014;
 constexpr unsigned int stencil_bits                 = 0x1015;
 constexpr unsigned int depth_bits                   = 0x1016;
 constexpr unsigned int alpha_bits                   = 0x1017;
-constexpr unsigned int blue_bits                    = 0x1018;
-constexpr unsigned int green_bits                   = 0x1019;
-constexpr unsigned int red_bits                     = 0x101A;
+constexpr unsigned int alpha_shift                  = 0x1018;
+constexpr unsigned int blue_bits                    = 0x1019;
+constexpr unsigned int blue_shift                   = 0x101A;
+constexpr unsigned int green_bits                   = 0x101B;
+constexpr unsigned int green_shift                  = 0x101C;
+constexpr unsigned int red_bits                     = 0x101D;
+constexpr unsigned int red_shift                    = 0x101E;
 
 // OpenGL Attribute values constants.
 constexpr unsigned int no_api                       = 0x1100;

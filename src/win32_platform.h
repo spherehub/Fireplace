@@ -350,30 +350,34 @@ namespace fireplace {
      */
     struct _win32_wgl_config final {
         unsigned int profile            =  any_profile;
-        unsigned int debug              =  0;
-        unsigned int forward_compat     =  0;
-        unsigned int no_error           =  0;
+        unsigned int debug              =  false;
+        unsigned int forward_compat     =  false;
+        unsigned int no_error           =  false;
         unsigned int release_behaviour  =  any_release_behaviour;
         unsigned int robustness         =  no_robustness;
         unsigned int major_version      =  1;
         unsigned int minor_version      =  1;
         unsigned int creation_api       =  native_context_api;
         unsigned int client_api         =  opengl_api;
-        unsigned int stereoscopic       =  0;
+        unsigned int stereoscopic       =  false;
         unsigned int samples            =  0;
         unsigned int auxiliary_buffers  =  0;
         unsigned int double_buffered    =  1;
-        unsigned int transparent        =  0;
-        unsigned int accum_alpha_bits   = -1;
-        unsigned int accum_green_bits   = -1;
-        unsigned int accum_blue_bits    = -1;
-        unsigned int accum_red_bits     = -1;
+        unsigned int transparent        =  false;
+        unsigned int accum_alpha_bits   =  0;
+        unsigned int accum_green_bits   =  0;
+        unsigned int accum_blue_bits    =  0;
+        unsigned int accum_red_bits     =  0;
         unsigned int stencil_bits       =  8;
         unsigned int depth_bits         = 24;
         unsigned int alpha_bits         =  8;
+        unsigned int alpha_shift        =  0;
         unsigned int blue_bits          =  8;
+        unsigned int blue_shift         =  0;
         unsigned int green_bits         =  8;
+        unsigned int green_shift        =  0;
         unsigned int red_bits           =  8;
+        unsigned int red_shift          =  0;
         unsigned int handle             =  0;
 
         // Constructs a new win32 wgl configuration.

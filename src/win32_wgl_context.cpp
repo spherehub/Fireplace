@@ -87,9 +87,13 @@ int fireplace::choose_pixel_format(
             ) continue;
 
             _current->red_bits          = get_pixel_format_attrib(device, n, WGL_RED_BITS_ARB);
+            _current->red_shift         = get_pixel_format_attrib(device, n, WGL_RED_SHIFT_ARB);
             _current->green_bits        = get_pixel_format_attrib(device, n, WGL_GREEN_BITS_ARB);
+            _current->green_shift       = get_pixel_format_attrib(device, n, WGL_GREEN_SHIFT_ARB);
             _current->blue_bits         = get_pixel_format_attrib(device, n, WGL_BLUE_BITS_ARB);
+            _current->blue_shift        = get_pixel_format_attrib(device, n, WGL_BLUE_SHIFT_ARB);
             _current->alpha_bits        = get_pixel_format_attrib(device, n, WGL_ALPHA_BITS_ARB);
+            _current->alpha_shift       = get_pixel_format_attrib(device, n, WGL_ALPHA_SHIFT_ARB);
             _current->depth_bits        = get_pixel_format_attrib(device, n, WGL_DEPTH_BITS_ARB);
             _current->stencil_bits      = get_pixel_format_attrib(device, n, WGL_STENCIL_BITS_ARB);
             _current->accum_red_bits    = get_pixel_format_attrib(device, n, WGL_ACCUM_RED_BITS_ARB);
@@ -125,9 +129,13 @@ int fireplace::choose_pixel_format(
                 continue;
 
             _current->red_bits          = pfd.cRedBits;
+            _current->red_shift         = pfd.cRedShift;
             _current->green_bits        = pfd.cGreenBits;
+            _current->green_shift       = pfd.cGreenShift;
             _current->blue_bits         = pfd.cBlueBits;
+            _current->blue_shift        = pfd.cBlueShift;
             _current->alpha_bits        = pfd.cAlphaBits;
+            _current->alpha_shift       = pfd.cAlphaShift;
             _current->depth_bits        = pfd.cDepthBits;
             _current->stencil_bits      = pfd.cStencilBits;
             _current->accum_red_bits    = pfd.cAccumRedBits;
@@ -139,7 +147,7 @@ int fireplace::choose_pixel_format(
             if (pfd.dwFlags & PFD_STEREO)
                 _current->stereoscopic = true;
 
-            if (pfd.dwFlags& PFD_DOUBLEBUFFER)
+            if (pfd.dwFlags & PFD_DOUBLEBUFFER)
                 _current->double_buffered = true;
         }
 
@@ -167,7 +175,7 @@ int fireplace::choose_pixel_format(
 
     // Find closest match.
     for (int i = 0; i < usable_count; i++) {
-        _final = usable_configs + i;
+        _final = &usable_configs[i];
 
         // They must both either be double_buffered or not.
         if (expected.double_buffered != _final->double_buffered) continue;
@@ -187,75 +195,113 @@ int fireplace::choose_pixel_format(
 
         color_diff = 0;
         if (expected.red_bits != -1) {
-            color_diff = (
+            color_diff += (
                 (expected.red_bits - _final->red_bits) *
                 (expected.red_bits - _final->red_bits)
             );
         }
 
+        if (expected.red_shift != -1) {
+            color_diff += (
+                (expected.red_shift - _final->red_shift) *
+                (expected.red_shift - _final->red_shift)
+            );
+        }
+
         if (expected.green_bits != -1) {
-            color_diff = (
+            color_diff += (
                 (expected.green_bits - _final->green_bits) *
                 (expected.green_bits - _final->green_bits)
             );
         }
 
+        if (expected.green_shift != -1) {
+            color_diff += (
+                (expected.green_shift - _final->green_shift) *
+                (expected.green_shift - _final->green_shift)
+            );
+        }
+
         if (expected.blue_bits != -1) {
-            color_diff = (
+            color_diff += (
                 (expected.blue_bits - _final->blue_bits) *
                 (expected.blue_bits - _final->blue_bits)
             );
         }
 
-        extra_diff = 0;
+        if (expected.blue_shift != -1) {
+            color_diff += (
+                (expected.blue_shift - _final->blue_shift) *
+                (expected.blue_shift - _final->blue_shift)
+            );
+        }
+
         if (expected.alpha_bits != -1) {
-            color_diff = (
+            color_diff += (
                 (expected.alpha_bits - _final->alpha_bits) *
                 (expected.alpha_bits - _final->alpha_bits)
             );
         }
 
+        if (expected.alpha_shift != -1) {
+            color_diff += (
+                (expected.alpha_shift - _final->alpha_shift) *
+                (expected.alpha_shift - _final->alpha_shift)
+            );
+        }
+        
+        extra_diff = 0;
         if (expected.depth_bits != -1) {
-            color_diff = (
+            extra_diff += (
                 (expected.depth_bits - _final->depth_bits) *
                 (expected.depth_bits - _final->depth_bits)
             );
         }
 
         if (expected.stencil_bits != -1) {
-            color_diff = (
+            extra_diff += (
                 (expected.stencil_bits - _final->stencil_bits) *
                 (expected.stencil_bits - _final->stencil_bits)
             );
         }
 
         if (expected.accum_red_bits != -1) {
-            color_diff = (
+            extra_diff += (
                 (expected.accum_red_bits - _final->accum_red_bits) *
                 (expected.accum_red_bits - _final->accum_red_bits)
             );
         }
 
         if (expected.accum_green_bits != -1) {
-            color_diff = (
+            extra_diff += (
                 (expected.accum_green_bits - _final->accum_green_bits) *
                 (expected.accum_green_bits - _final->accum_green_bits)
             );
         }
 
         if (expected.accum_blue_bits != -1) {
-            color_diff = (
+            extra_diff += (
                 (expected.accum_blue_bits - _final->accum_blue_bits) *
                 (expected.accum_blue_bits - _final->accum_blue_bits)
             );
         }
 
+        if (expected.accum_alpha_bits != -1) {
+            extra_diff += (
+                (expected.accum_alpha_bits - _final->accum_alpha_bits) *
+                (expected.accum_alpha_bits - _final->accum_alpha_bits)
+            );
+        }
+
         if (expected.samples != -1) {
-            color_diff = (
+            extra_diff += (
                 (expected.samples - _final->samples) *
                 (expected.samples - _final->samples)
             );
         }
+
+        // We don't care about sRGB but we should count that as a difference.
+        extra_diff++;
 
         if (missing < least_missing) closest = _final;
         if (missing == least_missing) {
@@ -284,7 +330,7 @@ int fireplace::choose_pixel_format(
 
     pixel_format = closest->handle;
     delete[] usable_configs;
-    return pixel_format;
+    return 10;
 }
 
 // Constructs a new win32 wgl context.
