@@ -9,6 +9,8 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		DirectX Debug|x64 = DirectX Debug|x64
+		DirectX Debug|x86 = DirectX Debug|x86
 		OpenGL Debug|x64 = OpenGL Debug|x64
 		OpenGL Debug|x86 = OpenGL Debug|x86
 		Release|x64 = Release|x64
@@ -19,6 +21,10 @@ Global
 		{559CC464-9F00-48D7-9AD6-A535AF36AA7F}.Debug|x64.Build.0 = Debug|x64
 		{559CC464-9F00-48D7-9AD6-A535AF36AA7F}.Debug|x86.ActiveCfg = Debug|Win32
 		{559CC464-9F00-48D7-9AD6-A535AF36AA7F}.Debug|x86.Build.0 = Debug|Win32
+		{559CC464-9F00-48D7-9AD6-A535AF36AA7F}.DirectX Debug|x64.ActiveCfg = DirectX Debug|x64
+		{559CC464-9F00-48D7-9AD6-A535AF36AA7F}.DirectX Debug|x64.Build.0 = DirectX Debug|x64
+		{559CC464-9F00-48D7-9AD6-A535AF36AA7F}.DirectX Debug|x86.ActiveCfg = DirectX Debug|Win32
+		{559CC464-9F00-48D7-9AD6-A535AF36AA7F}.DirectX Debug|x86.Build.0 = DirectX Debug|Win32
 		{559CC464-9F00-48D7-9AD6-A535AF36AA7F}.OpenGL Debug|x64.ActiveCfg = OpenGL Debug|x64
 		{559CC464-9F00-48D7-9AD6-A535AF36AA7F}.OpenGL Debug|x64.Build.0 = OpenGL Debug|x64
 		{559CC464-9F00-48D7-9AD6-A535AF36AA7F}.OpenGL Debug|x86.ActiveCfg = OpenGL Debug|Win32

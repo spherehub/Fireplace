@@ -46,7 +46,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 1
-#define FIREPLACE_PATCH 3
+#define FIREPLACE_PATCH 4
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
@@ -129,6 +129,9 @@ constexpr unsigned int release_behaviour_none       = 0x110B;
 constexpr unsigned int native_context_api           = 0x110C;
 constexpr unsigned int egl_context_api              = 0x110D; // Future support for egl.
 constexpr unsigned int osmesa_context_api           = 0x110E; // Future support for osmesa.
+
+#elif defined(_FIREPLACE_DIRECTX)
+
 #endif
 
 namespace fireplace {

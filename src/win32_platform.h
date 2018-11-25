@@ -438,6 +438,9 @@ namespace fireplace {
         // Swaps the buffers of this context.
         void swap_buffers();
     };
+
+#elif defined(_FIREPLACE_DIRECTX)
+
 #endif
 }
 

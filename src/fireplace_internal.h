@@ -122,6 +122,9 @@ namespace fireplace {
          * Although this is preferred over the PFD.
          */
         _win32_wgl_config config;
+
+    #elif defined(_FIREPLACE_DIRECTX)
+
     #endif // _FIREPLACE_OPENGL
     #endif // _WIN32
 
