@@ -23,7 +23,29 @@
 #ifndef _FIREPLACE_HEADER
 #define _FIREPLACE_HEADER
 
-#if !defined(_WIN32) && (defined(__WIN32__) || defined(WIN32) || defined(__MINGW32__))
+// Linux system.
+#ifdef __linux__
+#define _UNIX
+#endif
+
+// Mac or Apple system.
+#if defined(__APPLE__) || defined(__MACH__)
+#define _APPLE
+#define _UNIX
+#endif
+
+// Other unix based systems.
+#if defined(unix) || defined(__unix) || defined(__unix__)
+#define _UNIX
+#endif
+
+// This isn't allowed due to compatibility.
+#if defined(_UNIX) && defined(_FIREPLACE_DIRECTX)
+#error "DirectX is not available on unix systems!"
+#endif
+
+// Windows based systems.
+#if !defined(_WIN32) && (defined(__WIN32__) || defined(WIN32) || defined(__MINGW32__) || defined(__CYGWIN__))
 #define _WIN32
 #endif // _WIN32
 
@@ -46,7 +68,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 1
-#define FIREPLACE_PATCH 5
+#define FIREPLACE_PATCH 6
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
