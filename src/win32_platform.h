@@ -440,6 +440,18 @@ namespace fireplace {
     };
 
 #elif defined(_FIREPLACE_DIRECTX)
+    #include <dxgi.h>
+
+    /**/
+    struct _win32_dx_library {
+    };
+
+    struct _win32_dx_config {
+    };
+
+    /**/
+    struct _win32_dx_context {
+    };
 
 #endif
 }

@@ -114,7 +114,7 @@ namespace fireplace {
         _win32_library win32;
 
     #ifdef _FIREPLACE_OPENGL
-        // The window necessary wgl library.
+        // The windoww necessary wgl library.
         _win32_wgl_library wgl;
 
         /*
@@ -124,6 +124,14 @@ namespace fireplace {
         _win32_wgl_config config;
 
     #elif defined(_FIREPLACE_DIRECTX)
+        // The windows necessary directx library.
+        _win32_dx_library wdx;
+
+        /*
+         * The configuration for contexts. Shares similar traits to the PFD.
+         * Although this is preferred over the PFD.
+         */
+        _win32_dx_config config;
 
     #endif // _FIREPLACE_OPENGL
     #endif // _WIN32

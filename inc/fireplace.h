@@ -68,10 +68,14 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 1
-#define FIREPLACE_PATCH 6
+#define FIREPLACE_PATCH 7
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
+#ifdef _WIN32
+#pragma comment(lib, "opengl32.lib")
+#endif
+
 // OpenGL and OpenGL ES headers.
 #ifdef _FIREPLACE_INCLUDE_ES1
 #include <GLES/gl.h>
@@ -153,6 +157,11 @@ constexpr unsigned int egl_context_api              = 0x110D; // Future support 
 constexpr unsigned int osmesa_context_api           = 0x110E; // Future support for osmesa.
 
 #elif defined(_FIREPLACE_DIRECTX)
+#pragma comment(lib, "dxgi.lib")
+#pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "d3dx11.lib")
+#pragma comment(lib, "d3dx10.lib")
+
 
 #endif
 
