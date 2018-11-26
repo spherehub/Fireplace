@@ -68,7 +68,7 @@
 // Versioning.
 #define FIREPLACE_MAJOR 0
 #define FIREPLACE_MINOR 1
-#define FIREPLACE_PATCH 12
+#define FIREPLACE_PATCH 13
 
 // Context rendering apis.
 #ifdef _FIREPLACE_OPENGL
@@ -275,6 +275,10 @@ namespace fireplace {
     /* TODO: monitor and video_mode should go here */
     // struct video_mode {};
     // class monitor {};
+	class monitor {
+	public:
+		static monitor* get_primary();
+	};
 
     /* TODO: input, keyboard, mouse, gamepad, and joystick should go here. */
     /*

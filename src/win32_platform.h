@@ -168,6 +168,7 @@ namespace fireplace {
     std::wstring _win32_title(handle& _window);
 
     /* TODO: Windows specific monitor code. */
+	monitor* _win32_get_primary_monitor();
 
     // WGL specific structures and code.
 #ifdef _FIREPLACE_OPENGL
